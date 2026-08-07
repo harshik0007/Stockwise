@@ -1,0 +1,2 @@
+# Stockwise
+Flutter project
