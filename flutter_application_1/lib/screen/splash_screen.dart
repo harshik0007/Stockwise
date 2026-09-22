@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/resources/app_colors.dart';
+import 'package:flutter_application_1/resources/app_strings.dart';
+import 'package:flutter_application_1/resources/app_text_size.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -6,33 +9,42 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
 
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.inventory_2_outlined, size: 80, color: Colors.blue),
+            Icon(Icons.inventory_2_outlined, size: 80, color: AppColors.primaryColor),
 
             const SizedBox(height: 8),
 
             Text(
-              'StockWise',
+              AppStrings.appName,
               style: TextStyle(
-                fontSize: 24,
+                fontSize: AppSizes.title,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                color: AppColors.primaryColor,
               ),
             ),
 
             const SizedBox(height: 4),
 
             Text(
-              'Simple Inventory',
-              style: TextStyle(fontSize: 12, color: Colors.black),
+              AppStrings.simpleInventory,
+              style: TextStyle(
+                fontSize: AppSizes.extraSmall, 
+                color: AppColors.textColor,
+              ),
             ),
 
-            Text('System', style: TextStyle(fontSize: 12, color: Colors.black)),
+            Text(
+              AppStrings.system,
+              style: TextStyle(
+                fontSize: AppSizes.extraSmall, 
+                color: AppColors.textColor,
+              )
+            ),
           ],
         ),
       ),

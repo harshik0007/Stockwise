@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/resources/app_text_size.dart';
+import '../resources/app_colors.dart';
+import '../resources/app_strings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
 
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -34,9 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // Welcome
               const Text(
-                'Welcome Back!',
+                AppStrings.welcomeBack,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: AppSizes.title,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -44,9 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 5),
 
               const Text(
-                'Login to your account',
+                AppStrings.loginAccount,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: AppSizes.small,
                 ),
               ),
 
@@ -54,9 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // Email label
               const Text(
-                'Email / Username',
+                AppStrings.emailUsername,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: AppSizes.extraSmall,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -72,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   prefixIcon: const Icon(
                     Icons.email_outlined,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
 
                   border: OutlineInputBorder(
@@ -98,9 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // Password label
               const Text(
-                'Password',
+                AppStrings.password,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: AppSizes.extraSmall,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -118,12 +121,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   prefixIcon: const Icon(
                     Icons.lock_outline,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
 
                   suffixIcon: const Icon(
                     Icons.visibility_outlined,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
 
                   border: OutlineInputBorder(
@@ -155,9 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
 
                   child: const Text(
-                    'Forgot Password?',
+                    AppStrings.forgotPassword,
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: AppColors.primaryColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -183,8 +186,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
 
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
+                    backgroundColor: AppColors.primaryColor,
+                    foregroundColor: AppColors.backgroundColor,
 
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -192,9 +195,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   child: const Text(
-                    'Login',
+                    AppStrings.login,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: AppSizes.body,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -209,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 children: [
                   const Text(
-                    "Don't have an account?",
+                    AppStrings.noAccount,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -221,9 +224,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
 
                     child: const Text(
-                      'Sign up',
+                      AppStrings.signUp,
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

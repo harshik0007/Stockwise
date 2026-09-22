@@ -15,4 +15,11 @@ class AppStrings {
 
   static const String noAccount = "Don't have an account?";
   static const String signUp = 'Sign up';
+
+  static const String for_pass_title = "Forgot Password";
+  static const String next_line_of_fp = "Enter your registered email for otp";
+
+  static const String only_email = 'Email';
+  static const String send_otp = 'Send OTP';
+  static const String back_to_login = 'Back to Login';
 }
