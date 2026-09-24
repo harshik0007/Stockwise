@@ -26,4 +26,5 @@ class AppStrings {
   static const String enterotp = "Enter OTP";
   static const String next_line_of_enterotp = "Check mail box for otp";
   static const String otp = 'Otp';
+  static const String verify = 'Verify';
 }

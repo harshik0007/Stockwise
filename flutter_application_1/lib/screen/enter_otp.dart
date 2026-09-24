@@ -142,7 +142,7 @@ class _EnterOtpState extends State<EnterOtp> {
                   ),
 
                   child: const Text(
-                    AppStrings.send_otp,
+                    AppStrings.verify,
                     style: TextStyle(
                       fontSize: AppSizes.body,
                       fontWeight: FontWeight.bold,
