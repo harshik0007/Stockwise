@@ -22,4 +22,8 @@ class AppStrings {
   static const String only_email = 'Email';
   static const String send_otp = 'Send OTP';
   static const String back_to_login = 'Back to Login';
+
+  static const String enterotp = "Enter OTP";
+  static const String next_line_of_enterotp = "Check mail box for otp";
+  static const String otp = 'Otp';
 }
