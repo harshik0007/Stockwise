@@ -10,6 +10,8 @@ class AppStrings {
   static const String emailUsername = 'Email / Username';
   static const String password = 'Password';
 
+  static const String conpassword = 'Confirm Password';
+
   static const String forgotPassword = 'Forgot Password?';
   static const String login = 'Login';
 
@@ -20,6 +22,7 @@ class AppStrings {
   static const String next_line_of_fp = "Enter your registered email for otp";
 
   static const String only_email = 'Email';
+  static const String only_username = 'Username';
   static const String send_otp = 'Send OTP';
   static const String back_to_login = 'Back to Login';
 
@@ -27,4 +30,10 @@ class AppStrings {
   static const String next_line_of_enterotp = "Check mail box for otp";
   static const String otp = 'Otp';
   static const String verify = 'Verify';
+
+  static const String onlyregister = 'Register';
+  static const String registerhere = 'Register Here';
+  static const String registerfor__ = 'Register for your account';
+  static const String shopname = 'Shop Name';
+  static const String phoneNo= 'Phone no.';
 }
