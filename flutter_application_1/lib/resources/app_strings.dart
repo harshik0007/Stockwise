@@ -35,5 +35,19 @@ class AppStrings {
   static const String registerhere = 'Register Here';
   static const String registerfor__ = 'Register for your account';
   static const String shopname = 'Shop Name';
-  static const String phoneNo= 'Phone no.';
+  static const String phoneNo = 'Phone no.';
+
+  //update part
+  static const String updateStock = 'Update Stock';
+  static const String product = 'Product';
+  static const String selectProduct = 'Select a Product';
+  static const String currentStock = 'Current Stock';
+  static const String minimumStock = 'Minimum stock';
+  static const String actionType = 'Action Type';
+  static const String addStock = 'Add Stock';
+  static const String reduceStock = 'Reduce Stock';
+  static const String quantity = 'Quantity';
+  static const String enterQuantity = 'Enter Quantity';
+  static const String noteOptional = 'Note (Optional)';
+  static const String enterNote = 'Enter Note';
 }
