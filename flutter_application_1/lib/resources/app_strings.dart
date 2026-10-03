@@ -50,4 +50,15 @@ class AppStrings {
   static const String enterQuantity = 'Enter Quantity';
   static const String noteOptional = 'Note (Optional)';
   static const String enterNote = 'Enter Note';
+
+  //setting page
+  static const String settings = 'Settings';
+  static const String profileInformation = 'Profile Information';
+  static const String changePassword = 'Change Password';
+  static const String notification = 'Notification';
+  static const String aboutApp = 'About App';
+  static const String logout = 'LogOut';
+  static const String dashboard = 'Dashboard';
+  static const String stock = 'Stock';
+  static const String sales = 'Sales';
 }

@@ -5,6 +5,7 @@ import 'package:flutter_application_1/screen/login_screen.dart';
 import 'package:flutter_application_1/screen/register_screen.dart';
 import 'package:flutter_application_1/screen/splash_screen.dart';
 import 'package:flutter_application_1/screen/update_stock_screen.dart';
+import 'package:flutter_application_1/screen/settings_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: LoginScreen(),
+      home: SettingsScreen(),
     );
   }
 }
