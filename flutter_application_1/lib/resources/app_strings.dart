@@ -91,4 +91,29 @@ class AppStrings {
   //change password screen
   static const String oldPassword = 'Old Password';
   static const String newPassword = 'New Password';
+
+  //sales screen
+  static const String recordSales = 'Record Sales';
+  static const String thisMonth = 'This Month';
+  static const String totalSales = 'Total Sales';
+  static const String analyze = 'Analyze';
+  static const String qty = 'Qty';
+
+  //record sales screen
+  static const String recordSalesTitle = 'Record sales';
+  static const String quantitySold = 'Quantity Sold';
+  static const String sellingPrice = 'Selling Price';
+  static const String totalAmount = 'Total Amount';
+  static const String enterSellingPrice = 'Enter selling Price';
+  static const String productNote = 'Product Note';
+  static const String recordSale = 'Record Sale';
+
+  //analyze screen
+  static const String analytics = 'Analytics';
+  static const String startMonth = 'Start Month';
+  static const String endMonth = 'End Month';
+  static const String salesAnalysis = 'Sales Analysis';
+  static const String salesComparison = 'Sales Comparison';
+  static const String currentMonth = 'Current Month';
+  static const String previousMonth = 'Previous Month';
 }
