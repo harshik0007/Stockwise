@@ -9,6 +9,7 @@ import 'package:flutter_application_1/screen/settings_screen.dart';
 import 'package:flutter_application_1/screen/total_stock_screen.dart';
 import 'package:flutter_application_1/screen/low_stock_screen.dart';
 import 'package:flutter_application_1/screen/about_app_screen.dart';
+import 'package:flutter_application_1/screen/change_password_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: AboutAppScreen(),
+      home: ChangePasswordScreen(),
     );
   }
 }
