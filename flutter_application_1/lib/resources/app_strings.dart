@@ -84,4 +84,7 @@ class AppStrings {
   static const String minText = 'Min';
   static const String jhumkha = 'Jhumkha';
   static const String bengals = 'Bengals';
+
+  //about app
+  static const String version = 'Version 0.1.0';
 }
