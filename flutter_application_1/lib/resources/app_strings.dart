@@ -61,4 +61,27 @@ class AppStrings {
   static const String dashboard = 'Dashboard';
   static const String stock = 'Stock';
   static const String sales = 'Sales';
+
+  //total_stock_screen.dart
+  static const String totalStock = 'Total Stock';
+  static const String overview = 'Overview';
+  static const String lowStockList = 'Low stock list';
+  static const String totalItemsInStock = 'Total items in stock';
+  static const String allItemsAvailable = 'All items are available';
+  static const String inStock = 'In stock';
+  static const String lowStock = 'Low stock';
+  static const String outOfStock = 'Out of stock';
+  static const String stockByCategory = 'Stock by category';
+  static const String viewAll = 'View All';
+  static const String bangles = 'Bangles';
+  static const String earrings = 'Earrings';
+  static const String items = 'items';
+
+  //low stock screen
+  static const String lowStockTitle = 'Low Stock';
+  static const String minimumStockList = 'Minimum stock list';
+  static const String stockText = 'Stock';
+  static const String minText = 'Min';
+  static const String jhumkha = 'Jhumkha';
+  static const String bengals = 'Bengals';
 }
