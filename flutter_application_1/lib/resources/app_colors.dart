@@ -13,4 +13,22 @@ class AppColors {
   static const Color successBackground = Color(0xFFE8F6EC);
   static const Color warningBackground = Color(0xFFFFF0DD);
   static const Color errorBackground = Color(0xFFFFE8E8);
+
+  static const Color primary = Color(0xff2864E8);
+
+  static const Color white = Colors.white;
+
+  static const Color black = Colors.black;
+
+  static const Color red = Colors.red;
+
+  static const Color deleteRed = Color(0xffff3333);
+
+  static const Color circleBackground = Color(0xffe5e5e5);
+
+  static const Color circleBorder = Color(0xffaaaaaa);
+
+  static const Color shadow = Color(0x35000000);
+
+  static const Color blackShadow = Colors.black54;
 }

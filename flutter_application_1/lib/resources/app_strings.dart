@@ -236,5 +236,20 @@ class AppStrings {
 
   static const String noRecentProducts = 'No Recent products';
   
+  // Delete Product
+  static const String deleteProduct = 'Delete Product';
 
+  static const String deleteProductQuestion = 'Delete Product?';
+
+  static const String deleteConfirmation =
+      'Are you sure you want to delete\n'
+      'this product? This action can’t\n'
+      'be undone.';
+
+  // static const String cancel = 'Cancel';
+
+  static const String delete = 'Delete';
+
+  static const String productDeleted =
+      'Product deleted successfully';
 }
