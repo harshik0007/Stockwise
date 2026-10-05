@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screen/login_screen.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
+import 'profile_screen.dart';
+import 'change_password_screen.dart';
+import 'about_app_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -12,6 +16,42 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool notificationEnabled = true;
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content: const Text('Are you sure you want to logout?'),
+          actions: [
+            // Cancel button
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Cancel'),
+            ),
+
+            // Logout button
+            TextButton(
+              onPressed: () {
+                // Close the dialog
+                Navigator.pop(dialogContext);
+
+                // Navigate to Login screen
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false,
+                );
+              },
+              child: const Text('Logout', style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +96,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildSettingTile(
                       icon: Icons.person_outline,
                       title: AppStrings.profileInformation,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ProfileScreen(),
+                          ),
+                        );
+                      },
                     ),
 
                     _buildDivider(),
@@ -65,7 +112,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildSettingTile(
                       icon: Icons.lock_outline,
                       title: AppStrings.changePassword,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ChangePasswordScreen(),
+                          ),
+                        );
+                      },
                     ),
 
                     _buildDivider(),
@@ -79,7 +133,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildSettingTile(
                       icon: Icons.info_outline,
                       title: AppStrings.aboutApp,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AboutAppScreen(),
+                          ),
+                        );
+                      },
                     ),
 
                     _buildDivider(),
@@ -89,7 +150,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icons.logout,
                       title: AppStrings.logout,
                       isLogout: true,
-                      onTap: () {},
+                      onTap: () {
+                        _showLogoutDialog(context);
+                      },
                     ),
                   ],
                 ),
@@ -98,7 +161,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
 
           // BOTTOM NAVIGATION
-          _buildBottomNavigation(),
+          
         ],
       ),
     );
@@ -178,74 +241,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Divider(height: 1, thickness: 1, color: Colors.grey.shade300);
   }
 
-  Widget _buildBottomNavigation() {
-    return Container(
-      height: 66,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade300)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(
-            icon: Icons.home_outlined,
-            label: AppStrings.dashboard,
-            selected: false,
-          ),
-
-          _buildNavItem(
-            icon: Icons.inventory_2_outlined,
-            label: AppStrings.product,
-            selected: false,
-          ),
-
-          _buildNavItem(
-            icon: Icons.inventory_2,
-            label: AppStrings.stock,
-            selected: false,
-          ),
-
-          _buildNavItem(
-            icon: Icons.shopping_cart_outlined,
-            label: AppStrings.sales,
-            selected: false,
-          ),
-
-          _buildNavItem(
-            icon: Icons.person_outline,
-            label: AppStrings.settings,
-            selected: true,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem({
-    required IconData icon,
-    required String label,
-    required bool selected,
-  }) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 25,
-          color: selected ? AppColors.primaryColor : Colors.grey,
-        ),
-
-        const SizedBox(height: 2),
-
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            color: selected ? AppColors.primaryColor : Colors.grey,
-          ),
-        ),
-      ],
-    );
-  }
+  
 }

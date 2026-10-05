@@ -147,7 +147,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
 
           // BOTTOM NAVIGATION
-          _buildBottomNavigation(),
+          
         ],
       ),
     );
@@ -232,74 +232,74 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
   }
 
-  Widget _buildBottomNavigation() {
-    return Container(
-      height: 66,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade300)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(
-            icon: Icons.home_outlined,
-            label: AppStrings.dashboard,
-            selected: false,
-          ),
+  // Widget _buildBottomNavigation() {
+  //   return Container(
+  //     height: 66,
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       border: Border(top: BorderSide(color: Colors.grey.shade300)),
+  //     ),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //       children: [
+  //         _buildNavItem(
+  //           icon: Icons.home_outlined,
+  //           label: AppStrings.dashboard,
+  //           selected: false,
+  //         ),
 
-          _buildNavItem(
-            icon: Icons.inventory_2_outlined,
-            label: AppStrings.product,
-            selected: false,
-          ),
+  //         _buildNavItem(
+  //           icon: Icons.inventory_2_outlined,
+  //           label: AppStrings.product,
+  //           selected: false,
+  //         ),
 
-          _buildNavItem(
-            icon: Icons.inventory_2,
-            label: AppStrings.stock,
-            selected: false,
-          ),
+  //         _buildNavItem(
+  //           icon: Icons.inventory_2,
+  //           label: AppStrings.stock,
+  //           selected: false,
+  //         ),
 
-          _buildNavItem(
-            icon: Icons.shopping_cart_outlined,
-            label: AppStrings.sales,
-            selected: false,
-          ),
+  //         _buildNavItem(
+  //           icon: Icons.shopping_cart_outlined,
+  //           label: AppStrings.sales,
+  //           selected: false,
+  //         ),
 
-          _buildNavItem(
-            icon: Icons.person_outline,
-            label: AppStrings.settings,
-            selected: true,
-          ),
-        ],
-      ),
-    );
-  }
+  //         _buildNavItem(
+  //           icon: Icons.person_outline,
+  //           label: AppStrings.settings,
+  //           selected: true,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildNavItem({
-    required IconData icon,
-    required String label,
-    required bool selected,
-  }) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 25,
-          color: selected ? AppColors.primaryColor : Colors.grey,
-        ),
+  // Widget _buildNavItem({
+  //   required IconData icon,
+  //   required String label,
+  //   required bool selected,
+  // }) {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: [
+  //       Icon(
+  //         icon,
+  //         size: 25,
+  //         color: selected ? AppColors.primaryColor : Colors.grey,
+  //       ),
 
-        const SizedBox(height: 2),
+  //       const SizedBox(height: 2),
 
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            color: selected ? AppColors.primaryColor : Colors.grey,
-          ),
-        ),
-      ],
-    );
-  }
+  //       Text(
+  //         label,
+  //         style: TextStyle(
+  //           fontSize: 11,
+  //           color: selected ? AppColors.primaryColor : Colors.grey,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }
