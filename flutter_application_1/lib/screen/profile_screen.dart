@@ -30,8 +30,7 @@ class ProfileScreen extends StatelessWidget {
         ),
 
         title: Text(
-          'Profile',
-
+          AppStrings.profile,
           style: TextStyle(
             fontSize: AppSizes.title,
             fontWeight: FontWeight.bold,
@@ -97,15 +96,18 @@ class ProfileScreen extends StatelessWidget {
               // OWNER NAME
               // =================================================
               const Text(
-                'Owner Name',
+                AppStrings.ownerName,
 
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 4),
 
+              // =================================================
+              // ROLE
+              // =================================================
               const Text(
-                'Role',
+                AppStrings.role,
 
                 style: TextStyle(fontSize: 14, color: Colors.black87),
               ),
@@ -131,10 +133,8 @@ class ProfileScreen extends StatelessWidget {
                     // SHOP NAME
                     _buildProfileRow(
                       icon: Icons.home_outlined,
-
-                      title: 'Shop Name',
-
-                      value: 'example',
+                      title: AppStrings.shopName,
+                      value: AppStrings.example,
                     ),
 
                     Divider(height: 1, color: Colors.grey.shade400),
@@ -142,10 +142,8 @@ class ProfileScreen extends StatelessWidget {
                     // EMAIL
                     _buildProfileRow(
                       icon: Icons.email_outlined,
-
-                      title: 'Email',
-
-                      value: 'owner@example.com',
+                      title: AppStrings.email,
+                      value: AppStrings.ownerEmail,
                     ),
 
                     Divider(height: 1, color: Colors.grey.shade400),
@@ -153,10 +151,8 @@ class ProfileScreen extends StatelessWidget {
                     // PHONE
                     _buildProfileRow(
                       icon: Icons.phone_outlined,
-
-                      title: 'Phone',
-
-                      value: '+91 98765 43210',
+                      title: AppStrings.phone,
+                      value: AppStrings.ownerPhone,
                     ),
                   ],
                 ),
@@ -184,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
 
                   icon: const SizedBox.shrink(),
 
-                  label: const Text('Edit Profile'),
+                  label: const Text(AppStrings.editProfile),
 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
@@ -216,7 +212,7 @@ class ProfileScreen extends StatelessWidget {
 
                   icon: const Icon(Icons.logout, size: 18),
 
-                  label: const Text('Logout'),
+                  label: const Text(AppStrings.logout),
 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
@@ -297,29 +293,35 @@ class ProfileScreen extends StatelessWidget {
     showDialog(
       context: context,
 
-      builder: (context) {
+      builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Logout'),
+          title: const Text(AppStrings.logout),
 
-          content: const Text('Are you sure you want to logout?'),
+          content: const Text(AppStrings.logoutConfirmation),
 
           actions: [
+            // CANCEL
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(dialogContext);
               },
 
-              child: const Text('Cancel'),
+              child: const Text(AppStrings.cancel),
             ),
 
+            // LOGOUT
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(dialogContext);
 
                 // Logout logic will be added later.
               },
 
-              child: const Text('Logout', style: TextStyle(color: Colors.red)),
+              child: const Text(
+                AppStrings.logout,
+
+                style: TextStyle(color: Colors.red),
+              ),
             ),
           ],
         );
@@ -327,11 +329,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-// ============================================================
-// TEMPORARY EDIT PROFILE SCREEN
-// ============================================================
-//
-// We will replace this with your actual EditProfileScreen later.
-//
-

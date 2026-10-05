@@ -74,15 +74,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, size: 30),
-
           onPressed: () {
             Navigator.pop(context);
           },
         ),
 
         title: Text(
-          'Update Profile',
-
+          AppStrings.updateProfile,
           style: TextStyle(
             fontSize: AppSizes.title,
             fontWeight: FontWeight.bold,
@@ -107,24 +105,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // ==================================================
                 // USERNAME
                 // ==================================================
-                _buildLabel('Username'),
+                _buildLabel(AppStrings.username),
 
                 const SizedBox(height: 5),
 
                 _buildTextField(
                   controller: usernameController,
 
-                  hintText: 'Rohit',
+                  hintText: AppStrings.usernameHint,
 
                   prefixIcon: Icons.person_outline,
 
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Username is required';
+                      return AppStrings.usernameRequired;
                     }
 
                     if (value.trim().length < 3) {
-                      return 'Username must be at least 3 characters';
+                      return AppStrings.usernameMinLength;
                     }
 
                     return null;
@@ -136,14 +134,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // ==================================================
                 // EMAIL
                 // ==================================================
-                _buildLabel('Email'),
+                _buildLabel(AppStrings.email),
 
                 const SizedBox(height: 5),
 
                 _buildTextField(
                   controller: emailController,
 
-                  hintText: 'abc@gmail.com',
+                  hintText: AppStrings.emailHint,
 
                   prefixIcon: Icons.email_outlined,
 
@@ -151,7 +149,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Email is required';
+                      return AppStrings.emailRequired;
                     }
 
                     final emailRegex = RegExp(
@@ -159,7 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     );
 
                     if (!emailRegex.hasMatch(value.trim())) {
-                      return 'Enter a valid email';
+                      return AppStrings.validEmail;
                     }
 
                     return null;
@@ -171,20 +169,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // ==================================================
                 // SHOP NAME
                 // ==================================================
-                _buildLabel('Shop name'),
+                _buildLabel(AppStrings.shopNameLabel),
 
                 const SizedBox(height: 5),
 
                 _buildTextField(
                   controller: shopNameController,
 
-                  hintText: 'XYZ Shop',
+                  hintText: AppStrings.shopNameHint,
 
                   prefixIcon: Icons.home_outlined,
 
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Shop name is required';
+                      return AppStrings.shopNameRequired;
                     }
 
                     return null;
@@ -196,14 +194,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // ==================================================
                 // PHONE
                 // ==================================================
-                _buildLabel('Phone no.'),
+                _buildLabel(AppStrings.phoneNumber),
 
                 const SizedBox(height: 5),
 
                 _buildTextField(
                   controller: phoneController,
 
-                  hintText: '9999999999',
+                  hintText: AppStrings.phoneNumberHint,
 
                   prefixIcon: Icons.phone_outlined,
 
@@ -211,13 +209,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Phone number is required';
+                      return AppStrings.phoneRequired;
                     }
 
                     final phoneRegex = RegExp(r'^[0-9]{10}$');
 
                     if (!phoneRegex.hasMatch(value.trim())) {
-                      return 'Enter a valid 10 digit phone number';
+                      return AppStrings.validPhone;
                     }
 
                     return null;
@@ -229,7 +227,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // ==================================================
                 // PASSWORD
                 // ==================================================
-                _buildLabel('Password'),
+                _buildLabel(AppStrings.password),
 
                 const SizedBox(height: 5),
 
@@ -260,11 +258,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
 
                     child: Text(
-                      'Update Profile',
+                      AppStrings.updateProfile,
 
                       style: TextStyle(
                         fontSize: AppSizes.small,
-
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -318,7 +315,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
         hintStyle: const TextStyle(fontSize: 12, color: Colors.grey),
 
-        prefixIcon: Icon(prefixIcon, size: 22, color: Colors.grey.shade700),
+        prefixIcon: Icon(prefixIcon, size: 22, color: Colors.grey),
 
         contentPadding: const EdgeInsets.symmetric(
           vertical: 12,
@@ -366,11 +363,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Password is required';
+          return AppStrings.passwordRequired;
         }
 
         if (value.length < 8) {
-          return 'Password must be at least 8 characters';
+          return AppStrings.passwordMinLength;
         }
 
         return null;
@@ -379,7 +376,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       style: const TextStyle(fontSize: 12),
 
       decoration: InputDecoration(
-        hintText: '***********',
+        hintText: AppStrings.passwordHint,
 
         hintStyle: const TextStyle(fontSize: 12, color: Colors.grey),
 
@@ -450,9 +447,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
 
     // If validation is successful
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Profile updated successfully!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text(AppStrings.profileUpdated)));
 
     // Return to Profile screen after update
     Future.delayed(const Duration(milliseconds: 800), () {

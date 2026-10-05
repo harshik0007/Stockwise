@@ -29,7 +29,7 @@ class DashboardScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 32),
 
               child: Text(
-                'Dashboard',
+                AppStrings.dashboard,
 
                 style: TextStyle(
                   color: Colors.white,
@@ -54,7 +54,7 @@ class DashboardScreen extends StatelessWidget {
                     // GREETING
                     // ==================================================
                     const Text(
-                      'Hello Owner!',
+                      AppStrings.helloOwner,
 
                       style: TextStyle(
                         fontSize: 14,
@@ -66,7 +66,7 @@ class DashboardScreen extends StatelessWidget {
                     const SizedBox(height: 2),
 
                     const Text(
-                      'Here’s your business overview',
+                      AppStrings.businessOverview,
 
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
@@ -83,8 +83,8 @@ class DashboardScreen extends StatelessWidget {
                             icon: Icons.shopping_basket,
                             iconColor: Colors.green,
                             value: '120',
-                            title: 'Total',
-                            subtitle: 'Products',
+                            title: AppStrings.total,
+                            subtitle: AppStrings.products,
                           ),
                         ),
 
@@ -95,8 +95,8 @@ class DashboardScreen extends StatelessWidget {
                             icon: Icons.production_quantity_limits,
                             iconColor: Colors.blue,
                             value: '1,245',
-                            title: 'Total',
-                            subtitle: 'Stock',
+                            title: AppStrings.total,
+                            subtitle: AppStrings.stock,
                           ),
                         ),
 
@@ -107,8 +107,8 @@ class DashboardScreen extends StatelessWidget {
                             icon: Icons.priority_high,
                             iconColor: Colors.orange,
                             value: '18',
-                            title: 'Low Stock',
-                            subtitle: 'Items',
+                            title: AppStrings.lowStock,
+                            subtitle: AppStrings.items,
                           ),
                         ),
                       ],
@@ -120,7 +120,7 @@ class DashboardScreen extends StatelessWidget {
                     // QUICK ACTIONS
                     // ==================================================
                     const Text(
-                      'Quick Actions',
+                      AppStrings.quickActions,
 
                       style: TextStyle(
                         fontSize: 13,
@@ -137,7 +137,7 @@ class DashboardScreen extends StatelessWidget {
                           child: _buildActionCard(
                             icon: Icons.inventory_2,
                             iconColor: Colors.orange,
-                            title: 'Products',
+                            title: AppStrings.products,
                             onTap: () {
                               // Open Products
                             },
@@ -150,7 +150,7 @@ class DashboardScreen extends StatelessWidget {
                           child: _buildActionCard(
                             icon: Icons.shopping_cart,
                             iconColor: Colors.green,
-                            title: 'Record Sale',
+                            title: AppStrings.recordSale,
                             onTap: () {
                               // Record sale
                             },
@@ -163,7 +163,7 @@ class DashboardScreen extends StatelessWidget {
                           child: _buildActionCard(
                             icon: Icons.inventory_2_outlined,
                             iconColor: Colors.blue,
-                            title: 'Update Stock',
+                            title: AppStrings.updateStock,
                             onTap: () {
                               // Update stock
                             },
@@ -182,7 +182,7 @@ class DashboardScreen extends StatelessWidget {
 
                       children: [
                         const Text(
-                          'Recent Products',
+                          AppStrings.recentProducts,
 
                           style: TextStyle(
                             fontSize: 13,
@@ -196,7 +196,7 @@ class DashboardScreen extends StatelessWidget {
                           },
 
                           child: const Text(
-                            'View All',
+                            AppStrings.viewAll,
 
                             style: TextStyle(
                               fontSize: 12,
@@ -215,7 +215,7 @@ class DashboardScreen extends StatelessWidget {
                     // ==================================================
                     const Center(
                       child: Text(
-                        'No Recent products',
+                        AppStrings.noRecentProducts,
 
                         style: TextStyle(
                           fontSize: 13,

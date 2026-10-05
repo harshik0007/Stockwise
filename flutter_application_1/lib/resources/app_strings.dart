@@ -116,4 +116,125 @@ class AppStrings {
   static const String salesComparison = 'Sales Comparison';
   static const String currentMonth = 'Current Month';
   static const String previousMonth = 'Previous Month';
+
+  // =========================
+  // PROFILE
+  // =========================
+
+  static const String profile = 'Profile';
+  static const String ownerName = 'Owner Name';
+  static const String role = 'Role';
+
+  static const String shopName = 'Shop Name';
+  static const String example = 'example';
+
+  static const String email = 'Email';
+  static const String ownerEmail = 'owner@example.com';
+
+  static const String phone = 'Phone';
+  static const String ownerPhone = '+91 98765 43210';
+
+  static const String editProfile = 'Edit Profile';
+
+  // =========================
+  // UPDATE PROFILE
+  // =========================
+
+  static const String updateProfile = 'Update Profile';
+
+  static const String username = 'Username';
+  static const String usernameHint = 'Rohit';
+
+  static const String emailHint = 'abc@gmail.com';
+
+  static const String shopNameLabel = 'Shop name';
+  static const String shopNameHint = 'XYZ Shop';
+
+  static const String phoneNumber = 'Phone no.';
+  static const String phoneNumberHint = '9999999999';
+
+  // static const String password = 'Password';
+  static const String passwordHint = '***********';
+
+  // =========================
+  // UPDATE PROFILE VALIDATION
+  // =========================
+
+  static const String usernameRequired = 'Username is required';
+
+  static const String usernameMinLength =
+      'Username must be at least 3 characters';
+
+  static const String emailRequired = 'Email is required';
+
+  static const String validEmail = 'Enter a valid email';
+
+  static const String shopNameRequired = 'Shop name is required';
+
+  static const String phoneRequired = 'Phone number is required';
+
+  static const String validPhone = 'Enter a valid 10 digit phone number';
+
+  static const String passwordRequired = 'Password is required';
+
+  static const String passwordMinLength =
+      'Password must be at least 8 characters';
+
+  static const String profileUpdated = 'Profile updated successfully!';
+
+  // =========================
+  // LOGOUT
+  // =========================
+
+  // static const String logout = 'Logout';
+
+  static const String logoutConfirmation = 'Are you sure you want to logout?';
+
+  static const String cancel = 'Cancel';
+
+  // =========================
+  // DASHBOARD
+  // =========================
+
+  // static const String dashboard = 'Dashboard';
+
+  static const String helloOwner = 'Hello Owner!';
+
+  static const String businessOverview = 'Here’s your business overview';
+
+  // =========================
+  // DASHBOARD SUMMARY
+  // =========================
+
+  static const String total = 'Total';
+
+  static const String products = 'Products';
+
+  // static const String stock = 'Stock';
+
+  // static const String lowStock = 'Low Stock';
+
+  // static const String items = 'Items';
+
+  // =========================
+  // QUICK ACTIONS
+  // =========================
+
+  static const String quickActions = 'Quick Actions';
+
+  // static const String recordSale = 'Record Sale';
+
+  // static const String updateStock = 'Update Stock';
+
+  // =========================
+  // RECENT PRODUCTS
+  // =========================
+
+  static const String recentProducts = 'Recent Products';
+
+  // static const String viewAll = 'View All';
+
+  static const String noRecentProducts = 'No Recent products';
+  
+
 }
