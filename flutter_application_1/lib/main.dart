@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screen/add_product.dart';
 import 'package:flutter_application_1/screen/dashboard_screen.dart';
 import 'package:flutter_application_1/screen/delete_product.dart';
+import 'package:flutter_application_1/screen/edit_product.dart';
 import 'package:flutter_application_1/screen/enter_otp.dart';
 import 'package:flutter_application_1/screen/forget_password_screen.dart';
 import 'package:flutter_application_1/screen/login_screen.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const DeleteProductPage(),
+      home: const EditProductPage(),
 
     );
   }

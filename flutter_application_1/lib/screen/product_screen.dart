@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screen/add_product.dart';
+import 'package:flutter_application_1/screen/dashboard_screen.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/app_text_size.dart';
@@ -72,8 +74,13 @@ class _ProductScreenState extends State<ProductScreen> {
           icon: const Icon(Icons.arrow_back, size: 28),
 
           onPressed: () {
-            Navigator.pop(context);
-          },
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashboardScreen(),
+                  ),
+                );
+              },
         ),
 
         title: Text(
@@ -90,8 +97,13 @@ class _ProductScreenState extends State<ProductScreen> {
             icon: const Icon(Icons.add, size: 25),
 
             onPressed: () {
-              // Add Product page will be connected later.
-            },
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddProductPage(),
+                  ),
+                );
+              },
           ),
         ],
       ),

@@ -252,4 +252,65 @@ class AppStrings {
 
   static const String productDeleted =
       'Product deleted successfully';
+
+  // add product page
+  static const String addProduct = 'Add Product';
+
+  static const String productName = 'Product Name';
+
+  static const String category = 'Category';
+
+  static const String purchasePrice = 'Purchase Prize(₹)';
+
+  // static const String sellingPrice = 'Selling Price(₹)';
+
+  static const String initialStock = 'Initial Stock';
+
+  // static const String minimumStock = 'Minimum Stock';
+
+  static const String uploadImage = 'Upload Image';
+
+  static const String description = 'Description(Optional)';
+
+  static const String saveProduct = 'Save Product';
+
+  static const String productSaved =
+      'Product saved successfully';
+
+  static const String enterProductName =
+      'Enter Product Name';
+
+  static const String enterCategory =
+      'Enter Category';
+
+  static const String enterPurchasePrice =
+      'Enter Purchase Price';
+
+  // static const String enterSellingPrice ='Enter selling Price';
+
+  static const String enterInitialStock =
+      'Enter Initial Stock';
+
+  static const String enterMinimumStock =
+      'Enter Minimum Stock';
+
+  static const String clickHere = 'Click here';
+
+  static const String enterDescription =
+      'Enter Description';
+
+  // Edit Product 
+
+  
+
+  
+
+  // ================= EDIT PRODUCT =================
+
+  static const String editProduct = 'Edit Product';
+  static const String updateProduct = 'Update Product';
+
+  static const String updatedSuccessfully =
+      'Product updated successfully';
+
 }

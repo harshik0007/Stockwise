@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
+import 'package:flutter_application_1/screen/product_screen.dart';
 
 class DeleteProductPage extends StatelessWidget {
   const DeleteProductPage({super.key});
@@ -22,7 +23,12 @@ class DeleteProductPage extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProductScreen(),
+                  ),
+                );
               },
 
               padding: EdgeInsets.zero,

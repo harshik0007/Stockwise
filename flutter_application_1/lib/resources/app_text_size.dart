@@ -47,4 +47,44 @@ class AppSizes {
 
   static const double buttonElevation = 7;
 
+  // // App Bar
+  // static const double appBarHeight = 52;
+
+  // static const double backIconSize = 27;
+
+  // static const double appBarTitleSize = 17;
+
+  // static const double titleSpacing = 12;
+
+  // Page
+  static const double pageHorizontalPadding = 25;
+
+  static const double pageTopPadding = 12;
+
+  // Text
+  static const double labelSize = 10;
+
+  static const double inputTextSize = 10;
+
+  static const double hintTextSize = 10;
+
+  // Input
+  static const double inputHeight = 30;
+
+  static const double inputRadius = 7;
+
+  // Spacing
+  static const double fieldSpacing = 2;
+
+  static const double labelSpacing = 3;
+
+  // Save button
+  static const double saveButtonHeight = 31;
+
+  static const double saveButtonRadius = 8;
+
+  static const double saveButtonTextSize = 13;
+
+  static const double saveButtonElevation = 7;
+
 }

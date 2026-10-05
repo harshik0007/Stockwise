@@ -31,4 +31,16 @@ class AppColors {
   static const Color shadow = Color(0x35000000);
 
   static const Color blackShadow = Colors.black54;
+
+  //  static const Color primary = Color(0xff2864E8);
+
+  // static const Color white = Colors.white;
+
+  // static const Color black = Colors.black;
+
+  static const Color grey = Color(0xff888888);
+
+  static const Color border = Color(0xffdfe3e7);
+
+  static const Color green = Colors.green;
 }
