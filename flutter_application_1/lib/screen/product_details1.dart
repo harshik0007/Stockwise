@@ -11,7 +11,27 @@ import 'delete_product.dart';
 
 
 class ProductDetailsPage extends StatelessWidget {
-  const ProductDetailsPage({super.key});
+
+  final String productName;
+  final String category;
+  final String purchasePrice;
+  final String sellingPrice;
+  final String stock;
+  final String minimumStock;
+  final String description;
+  final String image;
+
+  const ProductDetailsPage({
+    super.key,
+    required this.productName,
+    required this.category,
+    required this.purchasePrice,
+    required this.sellingPrice,
+    required this.stock,
+    required this.minimumStock,
+    required this.description,
+    required this.image,
+  });
 
   // =================================================
   // BACK TO PRODUCT SCREEN
@@ -154,7 +174,7 @@ class ProductDetailsPage extends StatelessWidget {
                     ),
 
                     child: Image.asset(
-                      'assets/images/bangles.jpg',
+                      image,
 
                       width:
                           AppSizes.productImageWidth,
@@ -194,8 +214,8 @@ class ProductDetailsPage extends StatelessWidget {
                         AppSizes.productNameSpacing,
                   ),
 
-                  const Text(
-                    AppStrings.bangles,
+                  Text(
+                    productName,
 
                     style: TextStyle(
                       fontSize:
@@ -219,37 +239,32 @@ class ProductDetailsPage extends StatelessWidget {
                   // Category
                   detailRow(
                     AppStrings.category,
-                    AppStrings.banglesCategory,
+                    category,
                   ),
-
-                  // Purchase Price
+                  
                   detailRow(
                     AppStrings.purchasePrice,
-                    AppStrings.purchasePriceValue,
+                    purchasePrice,
                   ),
-
-                  // Selling Price
+                  
                   detailRow(
                     AppStrings.sellingPrice,
-                    AppStrings.sellingPriceValue,
+                    sellingPrice,
                   ),
-
-                  // Stock
+                  
                   detailRow(
                     AppStrings.initialStock,
-                    AppStrings.stockValue,
+                    stock,
                   ),
-
-                  // Minimum Stock
+                  
                   detailRow(
                     AppStrings.minimumStock,
-                    AppStrings.minimumStockValue,
+                    minimumStock,
                   ),
-
-                  // Description
+                  
                   detailRow(
                     AppStrings.description,
-                    AppStrings.descriptionValue,
+                    description,
                   ),
                 ],
               ),

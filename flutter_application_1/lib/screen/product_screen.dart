@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen/add_product.dart';
 import 'package:flutter_application_1/screen/dashboard_screen.dart';
 import 'package:flutter_application_1/screen/price_range.dart';
+import 'package:flutter_application_1/screen/product_details1.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/app_text_size.dart';
@@ -25,19 +26,28 @@ class _ProductScreenState extends State<ProductScreen> {
   // ==========================================================
 
   final List<Map<String, dynamic>> products = [
-    {
-      'name': 'Bangles',
-      'stock': 1000,
-      'price': 199,
-      'image': 'assets/images/img1.jpg',
-    },
-    {
-      'name': 'Jhumkha',
-      'stock': 500,
-      'price': 149,
-      'image': 'assets/images/img2.jpg',
-    },
-  ];
+  {
+    'name': 'Bangles',
+    'category': 'Bangles',
+    'purchasePrice': '₹80',
+    'price': '149',
+    'stock': '1000',
+    'minimumStock': '100',
+    'description': 'Golden bangles',
+    'image': 'assets/images/img1.jpg',
+  },
+
+  {
+    'name': 'Jhumkha',
+    'category': 'Jhumkha',
+    'purchasePrice': '₹109',
+    'price': '149',
+    'stock': '500',
+    'minimumStock': '100',
+    'description': 'Golden Jhumkha',
+    'image': 'assets/images/img2.jpg',
+  },
+];
 
   String searchText = '';
 
@@ -274,54 +284,130 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
+// ==========================================================
+// PRODUCT CARD
+// ==========================================================
 
-  // ==========================================================
-  // PRODUCT CARD
-  // ==========================================================
+Widget _buildProductCard(
+    Map<String, dynamic> product) {
 
-  Widget _buildProductCard(Map<String, dynamic> product) {
-    return Container(
+  return InkWell(
+
+    // ======================================================
+    // CLICK PRODUCT CARD
+    // ======================================================
+
+    onTap: () {
+
+      Navigator.push(
+        context,
+
+        MaterialPageRoute(
+          builder: (context) =>
+              ProductDetailsPage(
+
+            productName:
+                product['name'].toString(),
+
+            category:
+                product['category'].toString(),
+
+            purchasePrice:
+                product['purchasePrice'].toString(),
+
+            sellingPrice:
+                product['price'].toString(),
+
+            stock:
+                product['stock'].toString(),
+
+            minimumStock:
+                product['minimumStock'].toString(),
+
+            description:
+                product['description'].toString(),
+
+            image:
+                product['image'].toString(),
+          ),
+        ),
+      );
+    },
+
+    borderRadius:
+        BorderRadius.circular(8),
+
+    // ======================================================
+    // PRODUCT CARD CONTAINER
+    // ======================================================
+
+    child: Container(
+
       height: 74,
 
-      margin: const EdgeInsets.only(bottom: 10),
+      margin:
+          const EdgeInsets.only(
+        bottom: 10,
+      ),
 
-      padding: const EdgeInsets.all(5),
+      padding:
+          const EdgeInsets.all(5),
 
-      decoration: BoxDecoration(
+      decoration:
+          BoxDecoration(
+
         color: Colors.white,
 
-        borderRadius: BorderRadius.circular(8),
+        borderRadius:
+            BorderRadius.circular(8),
 
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(
+          color:
+              Colors.grey.shade300,
+        ),
       ),
 
       child: Row(
         children: [
+
           // ==================================================
           // PRODUCT IMAGE
           // ==================================================
+
           ClipRRect(
-            borderRadius: BorderRadius.circular(7),
+
+            borderRadius:
+                BorderRadius.circular(7),
 
             child: Image.asset(
-              product['image'],
+
+              product['image'].toString(),
 
               width: 56,
+
               height: 64,
 
               fit: BoxFit.cover,
 
-              // If image is missing, show an icon instead
-              errorBuilder: (context, error, stackTrace) {
+              errorBuilder:
+                  (context, error, stackTrace) {
+
                 return Container(
+
                   width: 56,
+
                   height: 64,
 
-                  color: Colors.grey.shade200,
+                  color:
+                      Colors.grey.shade200,
 
                   child: const Icon(
+
                     Icons.image_outlined,
-                    color: Colors.grey,
+
+                    color:
+                        Colors.grey,
+
                     size: 30,
                   ),
                 );
@@ -329,46 +415,76 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           ),
 
-          const SizedBox(width: 10),
+          const SizedBox(
+            width: 10,
+          ),
 
           // ==================================================
           // PRODUCT INFORMATION
           // ==================================================
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
 
-              crossAxisAlignment: CrossAxisAlignment.start,
+          Expanded(
+
+            child: Column(
+
+              mainAxisAlignment:
+                  MainAxisAlignment.center,
+
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
 
               children: [
-                Text(
-                  'Product Name :- ${product['name']}',
 
-                  style: const TextStyle(
+                Text(
+
+                  'Product Name :- '
+                  '${product['name']}',
+
+                  style:
+                      const TextStyle(
+
                     fontSize: 8,
-                    fontWeight: FontWeight.bold,
+
+                    fontWeight:
+                        FontWeight.bold,
                   ),
                 ),
 
-                const SizedBox(height: 5),
+                const SizedBox(
+                  height: 5,
+                ),
 
                 Text(
-                  'Stock :- ${product['stock']}',
 
-                  style: const TextStyle(
+                  'Stock :- '
+                  '${product['stock']}',
+
+                  style:
+                      const TextStyle(
+
                     fontSize: 8,
-                    fontWeight: FontWeight.bold,
+
+                    fontWeight:
+                        FontWeight.bold,
                   ),
                 ),
 
-                const SizedBox(height: 5),
+                const SizedBox(
+                  height: 5,
+                ),
 
                 Text(
-                  'One piece price:- ₹${product['price']}',
 
-                  style: const TextStyle(
+                  'One piece price:- ₹'
+                  '${product['price']}',
+
+                  style:
+                      const TextStyle(
+
                     fontSize: 8,
-                    fontWeight: FontWeight.bold,
+
+                    fontWeight:
+                        FontWeight.bold,
                   ),
                 ),
               ],
@@ -376,8 +492,9 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   // ==========================================================
   // SORT OPTIONS
