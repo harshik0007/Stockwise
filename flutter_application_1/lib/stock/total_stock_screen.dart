@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
+import 'all_categories_screen.dart';
+import 'low_stock_screen.dart';
 
 class TotalStockScreen extends StatelessWidget {
   const TotalStockScreen({super.key});
@@ -52,7 +54,17 @@ class TotalStockScreen extends StatelessWidget {
                         ),
                       ),
 
-                      Container(
+                      InkWell(
+                        borderRadius: BorderRadius.circular(7),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const LowStockScreen(),
+                            ),
+                          );
+                        },
+                        child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 6,
@@ -68,6 +80,7 @@ class TotalStockScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: AppColors.warningColor,
                           ),
+                        ),
                         ),
                       ),
                     ],
@@ -192,12 +205,26 @@ class TotalStockScreen extends StatelessWidget {
                         ),
                       ),
 
-                      Text(
-                        AppStrings.viewAll,
-                        style: TextStyle(
-                          fontSize: AppSizes.extraSmall,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryColor,
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AllCategoriesScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppStrings.viewAll,
+                            style: TextStyle(
+                              fontSize: AppSizes.extraSmall,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
                         ),
                       ),
                     ],

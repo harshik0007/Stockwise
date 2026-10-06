@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
-import 'package:flutter_application_1/screen/product_screen.dart';
-
-
-
 class PriceRangePage extends StatefulWidget {
   const PriceRangePage({super.key});
 
@@ -29,15 +25,7 @@ class _PriceRangePageState
   // =================================================
 
   void goToProductScreen() {
-
-    Navigator.pushReplacement(
-      context,
-
-      MaterialPageRoute(
-        builder: (context) =>
-            const ProductScreen(),
-      ),
-    );
+    Navigator.pop(context);
   }
 
 
@@ -58,13 +46,8 @@ class _PriceRangePageState
   // =================================================
 
   void applyPriceRange() {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const ProductScreen(),
-    ),
-  );
-}
+    Navigator.pop(context);
+  }
 
 
   // =================================================

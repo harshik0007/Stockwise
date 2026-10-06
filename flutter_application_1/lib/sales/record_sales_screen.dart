@@ -11,8 +11,63 @@ class RecordSalesScreen extends StatefulWidget {
 }
 
 class _RecordSalesScreenState extends State<RecordSalesScreen> {
+  final _formKey = GlobalKey<FormState>();
   String? selectedProduct;
-  String? selectedStock;
+  final quantityController = TextEditingController();
+  final sellingPriceController = TextEditingController();
+  final noteController = TextEditingController();
+  double totalAmount = 0;
+
+  @override
+  void dispose() {
+    quantityController.dispose();
+    sellingPriceController.dispose();
+    noteController.dispose();
+    super.dispose();
+  }
+
+  void _updateTotalAmount() {
+    final quantity = int.tryParse(quantityController.text) ?? 0;
+    final price = double.tryParse(sellingPriceController.text) ?? 0;
+    setState(() => totalAmount = quantity * price);
+  }
+
+  String? _validateProduct(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppStrings.productSelectionRequired;
+    }
+    return null;
+  }
+
+  String? _validateQuantity(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.quantityRequired;
+    }
+
+    final quantity = int.tryParse(value.trim());
+    if (quantity == null) {
+      return AppStrings.validWholeNumberRequired;
+    }
+    if (quantity <= 0) {
+      return AppStrings.quantityMustBePositive;
+    }
+    return null;
+  }
+
+  String? _validateSellingPrice(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.sellingPriceRequired;
+    }
+
+    final price = double.tryParse(value.trim());
+    if (price == null || !price.isFinite) {
+      return AppStrings.validPriceRequired;
+    }
+    if (price <= 0) {
+      return AppStrings.salePriceMustBePositive;
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +96,10 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
         ),
       ),
 
-      body: Column(
-        children: [
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(30, 24, 30, 18),
@@ -57,6 +114,7 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
                   DropdownButtonFormField<String>(
                     value: selectedProduct,
                     decoration: _inputDecoration(AppStrings.selectProduct),
+                    validator: _validateProduct,
                     icon: const Icon(Icons.keyboard_arrow_down, size: 20),
                     items: const [
                       DropdownMenuItem(
@@ -77,21 +135,7 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
 
                   const SizedBox(height: 10),
 
-                  // CURRENT STOCK
-                  DropdownButtonFormField<String>(
-                    value: selectedStock,
-                    decoration: _inputDecoration(AppStrings.currentStock),
-                    icon: const Icon(Icons.keyboard_arrow_down, size: 20),
-                    items: const [
-                      DropdownMenuItem(value: '20', child: Text('20')),
-                      DropdownMenuItem(value: '50', child: Text('50')),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        selectedStock = value;
-                      });
-                    },
-                  ),
+                  _buildProductInfo(),
 
                   const SizedBox(height: 10),
 
@@ -103,6 +147,9 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
                   _buildTextField(
                     hintText: AppStrings.enterQuantity,
                     keyboardType: TextInputType.number,
+                    controller: quantityController,
+                    onChanged: (_) => _updateTotalAmount(),
+                    validator: _validateQuantity,
                   ),
 
                   const SizedBox(height: 10),
@@ -114,7 +161,12 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
 
                   _buildTextField(
                     hintText: AppStrings.enterSellingPrice,
-                    keyboardType: TextInputType.number,
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    controller: sellingPriceController,
+                    onChanged: (_) => _updateTotalAmount(),
+                    validator: _validateSellingPrice,
                   ),
 
                   const SizedBox(height: 10),
@@ -129,7 +181,10 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
 
                   const SizedBox(height: 5),
 
-                  _buildTextField(hintText: AppStrings.productNote),
+                  _buildTextField(
+                    hintText: AppStrings.productNote,
+                    controller: noteController,
+                  ),
 
                   const SizedBox(height: 18),
 
@@ -139,6 +194,7 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
                     height: 46,
                     child: ElevatedButton(
                       onPressed: () {
+                        _formKey.currentState!.validate();
                         // Backend logic will be added in PSEE.
                       },
                       style: ElevatedButton.styleFrom(
@@ -165,8 +221,8 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
           ),
 
           // BOTTOM NAVIGATION
-          
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -194,19 +250,74 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
         borderRadius: BorderRadius.circular(7),
         borderSide: BorderSide(color: AppColors.primaryColor),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(7),
+        borderSide: BorderSide(color: AppColors.errorColor),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(7),
+        borderSide: BorderSide(color: AppColors.errorColor),
+      ),
+      errorStyle: TextStyle(
+        fontSize: AppSizes.extraSmall,
+        color: AppColors.errorColor,
+      ),
     );
   }
 
   Widget _buildTextField({
     required String hintText,
     TextInputType? keyboardType,
+    TextEditingController? controller,
+    ValueChanged<String>? onChanged,
+    String? Function(String?)? validator,
   }) {
-    return SizedBox(
-      height: 36,
-      child: TextField(
-        keyboardType: keyboardType,
-        decoration: _inputDecoration(hintText),
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      onChanged: onChanged,
+      validator: validator,
+      decoration: _inputDecoration(hintText),
+    );
+  }
+
+  Widget _buildProductInfo() {
+    final productCode = switch (selectedProduct) {
+      'Jhumkha' => 'PRD-0002',
+      'Bangles' => 'PRD-0001',
+      _ => '—',
+    };
+    final currentStock = switch (selectedProduct) {
+      'Jhumkha' => '500',
+      'Bangles' => '1000',
+      _ => '—',
+    };
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(7),
       ),
+      child: Column(
+        children: [
+          _buildInfoRow(AppStrings.productCode, productCode),
+          const SizedBox(height: 5),
+          _buildInfoRow(AppStrings.currentStock, currentStock),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: const TextStyle(fontSize: 11)),
+        Text(value, style: const TextStyle(fontSize: 11)),
+      ],
     );
   }
 
@@ -231,14 +342,12 @@ class _RecordSalesScreenState extends State<RecordSalesScreen> {
             ),
           ),
 
-          const Text(
-            '0',
+          Text(
+            '₹${totalAmount.toStringAsFixed(2)}',
             style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
           ),
         ],
       ),
     );
   }
-
-  
 }

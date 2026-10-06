@@ -14,6 +14,10 @@ class AppStrings {
 
   static const String forgotPassword = 'Forgot Password?';
   static const String login = 'Login';
+  static const String continueToDashboardDemo =
+      'Continue to Dashboard (Demo)';
+  static const String demoContinueToLogin = 'Continue to Login (Demo)';
+  static const String alreadyHaveAccount = 'Already have an account?';
 
   static const String noAccount = "Don't have an account?";
   static const String signUp = 'Sign up';
@@ -36,6 +40,11 @@ class AppStrings {
   static const String registerfor__ = 'Register for your account';
   static const String shopname = 'Shop Name';
   static const String phoneNo = 'Phone no.';
+  static const String fullName = 'Full Name';
+  static const String profileImage = 'Profile Image';
+  static const String location = 'Location';
+  static const String uploadProfileImage = 'Upload Profile Image';
+  static const String removeImage = 'Remove Image';
 
   //update part
   static const String updateStock = 'Update Stock';
@@ -124,6 +133,11 @@ class AppStrings {
   static const String profile = 'Profile';
   static const String ownerName = 'Owner Name';
   static const String role = 'Role';
+  static const String ownerFullName = 'Rohit Sharma';
+  static const String ownerUsername = 'rohit';
+  static const String ownerShopName = 'XYZ Shop';
+  static const String ownerLocation = 'Mumbai, India';
+  static const String ownerRole = 'Shop Owner';
 
   static const String shopName = 'Shop Name';
   static const String example = 'example';
@@ -179,6 +193,11 @@ class AppStrings {
 
   static const String passwordMinLength =
       'Password must be at least 8 characters';
+
+  static const String passwordsDoNotMatch = 'Passwords do not match';
+
+  static const String newPasswordMustDiffer =
+      'New password must be different';
 
   static const String profileUpdated = 'Profile updated successfully!';
 
@@ -271,6 +290,10 @@ class AppStrings {
   static const String uploadImage = 'Upload Image';
 
   static const String description = 'Description(Optional)';
+  static const String productCode = 'Product Code';
+  static const String productImage = 'Product Image';
+  static const String createdAt = 'Created At';
+  static const String updatedAt = 'Updated At';
 
   static const String saveProduct = 'Save Product';
 
@@ -293,6 +316,29 @@ class AppStrings {
 
   static const String enterMinimumStock =
       'Enter Minimum Stock';
+
+  // Product form validation
+  static const String productNameRequired = 'Product name is required';
+  static const String categoryRequired = 'Category is required';
+  static const String purchasePriceRequired = 'Purchase price is required';
+  static const String sellingPriceRequired = 'Selling price is required';
+  static const String minimumStockRequired = 'Minimum stock is required';
+  static const String initialStockRequired = 'Initial stock is required';
+  static const String validPriceRequired = 'Enter a valid price';
+  static const String negativePriceNotAllowed = 'Price cannot be negative';
+  static const String validWholeNumberRequired =
+      'Enter a valid whole number';
+  static const String negativeStockNotAllowed = 'Stock cannot be negative';
+  static const String sellingPriceBelowPurchasePrice =
+      'Selling price cannot be less than purchase price';
+  static const String productSelectionRequired = 'Select a product';
+  static const String quantityRequired = 'Quantity is required';
+  static const String quantityMustBePositive =
+      'Quantity must be greater than zero';
+  static const String salePriceMustBePositive =
+      'Selling price must be greater than zero';
+  static const String stockReductionExceedsCurrentStock =
+      'Quantity cannot exceed current stock';
 
   static const String clickHere = 'Click here';
 

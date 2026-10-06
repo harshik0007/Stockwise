@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
+import 'package:flutter_application_1/product/add_product.dart';
+import 'package:flutter_application_1/sales/record_sales_screen.dart';
+import 'package:flutter_application_1/stock/update_stock_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  const DashboardScreen({super.key, this.onProductsTap});
+
+  final VoidCallback? onProductsTap;
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +119,34 @@ class DashboardScreen extends StatelessWidget {
                       ],
                     ),
 
+                    const SizedBox(height: 8),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildSummaryCard(
+                            icon: Icons.inventory_2_outlined,
+                            iconColor: Colors.red,
+                            value: '2',
+                            title: AppStrings.outOfStock,
+                            subtitle: AppStrings.items,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: _buildSummaryCard(
+                            icon: Icons.currency_rupee,
+                            iconColor: Colors.green,
+                            value: '₹5,000',
+                            title: AppStrings.totalSales,
+                            subtitle: AppStrings.thisMonth,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Expanded(child: SizedBox.shrink()),
+                      ],
+                    ),
+
                     const SizedBox(height: 25),
 
                     // ==================================================
@@ -138,9 +171,7 @@ class DashboardScreen extends StatelessWidget {
                             icon: Icons.inventory_2,
                             iconColor: Colors.orange,
                             title: AppStrings.products,
-                            onTap: () {
-                              // Open Products
-                            },
+                            onTap: onProductsTap ?? () {},
                           ),
                         ),
 
@@ -152,7 +183,12 @@ class DashboardScreen extends StatelessWidget {
                             iconColor: Colors.green,
                             title: AppStrings.recordSale,
                             onTap: () {
-                              // Record sale
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const RecordSalesScreen(),
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -165,7 +201,30 @@ class DashboardScreen extends StatelessWidget {
                             iconColor: Colors.blue,
                             title: AppStrings.updateStock,
                             onTap: () {
-                              // Update stock
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const UpdateStockScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+                        const SizedBox(width: 8),
+
+                        Expanded(
+                          child: _buildActionCard(
+                            icon: Icons.add_box_outlined,
+                            iconColor: Colors.orange,
+                            title: AppStrings.addProduct,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const AddProductPage(),
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -190,18 +249,18 @@ class DashboardScreen extends StatelessWidget {
                           ),
                         ),
 
-                        GestureDetector(
-                          onTap: () {
-                            // Open all products
-                          },
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: onProductsTap,
+                            child: const Text(
+                              AppStrings.viewAll,
 
-                          child: const Text(
-                            AppStrings.viewAll,
-
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -304,36 +363,32 @@ class DashboardScreen extends StatelessWidget {
     required String title,
     required VoidCallback onTap,
   }) {
-    return InkWell(
-      onTap: onTap,
-
-      borderRadius: BorderRadius.circular(10),
-
-      child: Container(
-        height: 64,
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-
-          borderRadius: BorderRadius.circular(10),
-
-          border: Border.all(color: Colors.grey.shade500, width: 1),
-        ),
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: [
-            Icon(icon, size: 29, color: iconColor),
-
-            const SizedBox(height: 2),
-
-            Text(
-              title,
-
-              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
-            ),
-          ],
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          height: 64,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey.shade500, width: 1),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 29, color: iconColor),
+              const SizedBox(height: 2),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

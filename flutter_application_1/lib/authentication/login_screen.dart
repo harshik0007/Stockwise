@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
-import 'package:flutter_application_1/screen/forget_password_screen.dart';
-import 'package:flutter_application_1/screen/register_screen.dart';
+import 'package:flutter_application_1/authentication/forget_password_screen.dart';
+import 'package:flutter_application_1/authentication/register_screen.dart';
+import 'package:flutter_application_1/navigation/main_screen.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 
@@ -31,9 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Form(
           key: _formKey,
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
               const SizedBox(height: 115),
 
@@ -214,6 +216,27 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 5),
 
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const MainScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
+                  child: const Text(
+                    AppStrings.continueToDashboardDemo,
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+
               // Sign up
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -247,7 +270,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

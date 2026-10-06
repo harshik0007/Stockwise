@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
+import 'package:flutter_application_1/authentication/enter_otp.dart';
 
-
-class EnterOtp extends StatefulWidget {
-  const EnterOtp({super.key});
+class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
-  State<EnterOtp> createState() => _EnterOtpState();
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
-class _EnterOtpState extends State<EnterOtp> { 
-
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController otpcontroller = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,52 +22,51 @@ class _EnterOtpState extends State<EnterOtp> {
       backgroundColor: AppColors.backgroundColor,
 
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 50, 
-          vertical: 10
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+
 
         child: Form(
           key: _formKey,
-          child: Column(
 
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
+
               const SizedBox(height: 80),
 
               // Back Arrow
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                }, 
+              // IconButton(
+              //   onPressed: () {
+              //     Navigator.pop(context);
+              //   }, 
 
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 30,
-                  color: AppColors.textColor,
-                ),
+              //   icon: const Icon(
+              //     Icons.arrow_back,
+              //     size: 30,
+              //     color: AppColors.textColor,
+              //   ),
 
-                padding: EdgeInsets.zero,
-                alignment: Alignment.centerLeft,
-              ),
+              //   padding: EdgeInsets.zero,
+              //   alignment: Alignment.centerLeft,
+              // ),
 
               const SizedBox(height: 50),
 
               const Text(
-                AppStrings.enterotp,
+                AppStrings.for_pass_title,
                 style: TextStyle(
                   fontSize: AppSizes.title,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              const SizedBox(height: 5),
+              const SizedBox(height: 5,),
 
               const Text(
-                AppStrings.next_line_of_enterotp,
+                AppStrings.next_line_of_fp,
                 style: TextStyle(
-                  fontSize: AppSizes.small,
+                  fontSize: AppSizes.small, 
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -75,48 +74,47 @@ class _EnterOtpState extends State<EnterOtp> {
               const SizedBox(height: 50),
 
               const Text(
-                AppStrings.otp,
+                AppStrings.only_email,
                 style: TextStyle(
-                  fontSize: AppSizes.extraSmall,
-                  fontWeight: FontWeight.bold,
+                  fontSize: AppSizes.extraSmall, 
+                  fontWeight: FontWeight.bold
                 ),
               ),
 
-              // OTP field
+              // Email field
               TextFormField(
-                controller: otpcontroller,
+                controller: emailController,
 
                 decoration: InputDecoration(
-                  hintText: 'eg.123456',
+                  hintText: 'abc@gmail.com',
+
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                    color: AppColors.greyColor,
+                  ),
 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
 
-                // VAlidation of otp field
+                // Email validation
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty){
-                    return 'Please enter OTP';
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
                   }
 
-                  if (value.length != 6){
-                    return 'OTP must be 6 digits';
-                  }
-
-                  if (!RegExp(r'^[0-9]+$').hasMatch(value)){
-                    return 'OTP must contain only numbers';
+                  if (!value.contains('@')) {
+                    return 'Please enter a valid email';
                   }
 
                   return null;
                 },
               ),
 
-              
-              
+              const SizedBox(height: 35,),
 
-              const SizedBox(height: 25),
-
+              // send otp button
               SizedBox(
                 width: double.infinity,
                 height: 48,
@@ -126,7 +124,10 @@ class _EnterOtpState extends State<EnterOtp> {
                     print("LOGIN BUTTON CLICKED");
 
                     if (_formKey.currentState!.validate()) {
-                      print("VALIDATION PASSED");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const EnterOtp()),
+                      );
                     } else {
                       print("VALIDATION FAILED");
                     }
@@ -142,7 +143,7 @@ class _EnterOtpState extends State<EnterOtp> {
                   ),
 
                   child: const Text(
-                    AppStrings.verify,
+                    AppStrings.send_otp,
                     style: TextStyle(
                       fontSize: AppSizes.body,
                       fontWeight: FontWeight.bold,
@@ -151,7 +152,7 @@ class _EnterOtpState extends State<EnterOtp> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 25,),
 
               // Back to login
               Align(
@@ -159,7 +160,7 @@ class _EnterOtpState extends State<EnterOtp> {
 
                 child: TextButton(
                   onPressed: () {
-                    // back to login
+                    Navigator.pop(context);
                   },
 
                   child: const Text(
@@ -172,10 +173,8 @@ class _EnterOtpState extends State<EnterOtp> {
                 ),
               ),
             ],
-
-          )
+          ),
         ),
-
       ),
     );
   }

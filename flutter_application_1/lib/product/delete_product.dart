@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
-import 'package:flutter_application_1/screen/product_screen.dart';
 
 class DeleteProductPage extends StatelessWidget {
   const DeleteProductPage({super.key});
@@ -23,12 +22,7 @@ class DeleteProductPage extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProductScreen(),
-                  ),
-                );
+                Navigator.pop(context);
               },
 
               padding: EdgeInsets.zero,
@@ -40,9 +34,7 @@ class DeleteProductPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(
-              width: AppSizes.titleSpacing,
-            ),
+            const SizedBox(width: AppSizes.titleSpacing),
 
             const Text(
               AppStrings.deleteProduct,
@@ -59,10 +51,7 @@ class DeleteProductPage extends StatelessWidget {
       // ================= BODY =================
       body: Column(
         children: [
-
-          const SizedBox(
-            height: AppSizes.topSpacing,
-          ),
+          const SizedBox(height: AppSizes.topSpacing),
 
           // ================= DELETE ICON CIRCLE =================
           Container(
@@ -74,10 +63,7 @@ class DeleteProductPage extends StatelessWidget {
 
               color: AppColors.circleBackground,
 
-              border: Border.all(
-                color: AppColors.circleBorder,
-                width: 1,
-              ),
+              border: Border.all(color: AppColors.circleBorder, width: 1),
 
               boxShadow: const [
                 BoxShadow(
@@ -98,9 +84,7 @@ class DeleteProductPage extends StatelessWidget {
           ),
 
           // ================= TITLE =================
-          const SizedBox(
-            height: AppSizes.titleSpacingAfterIcon,
-          ),
+          const SizedBox(height: AppSizes.titleSpacingAfterIcon),
 
           const Text(
             AppStrings.deleteProductQuestion,
@@ -113,14 +97,10 @@ class DeleteProductPage extends StatelessWidget {
           ),
 
           // ================= DESCRIPTION =================
-          const SizedBox(
-            height: AppSizes.descriptionSpacing,
-          ),
+          const SizedBox(height: AppSizes.descriptionSpacing),
 
           const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 10),
 
             child: Text(
               AppStrings.deleteConfirmation,
@@ -148,7 +128,6 @@ class DeleteProductPage extends StatelessWidget {
 
             child: Row(
               children: [
-
                 // ================= CANCEL =================
                 Expanded(
                   child: SizedBox(
@@ -188,9 +167,7 @@ class DeleteProductPage extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(
-                  width: AppSizes.buttonSpacing,
-                ),
+                const SizedBox(width: AppSizes.buttonSpacing),
 
                 // ================= DELETE =================
                 Expanded(
@@ -243,25 +220,16 @@ class DeleteProductPage extends StatelessWidget {
   void deleteProduct(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text(
-          AppStrings.productDeleted,
-        ),
+        content: Text(AppStrings.productDeleted),
 
         backgroundColor: AppColors.errorColor,
 
-        duration: Duration(
-          seconds: 2,
-        ),
+        duration: Duration(seconds: 2),
       ),
     );
 
-    Future.delayed(
-      const Duration(
-        milliseconds: 500,
-      ),
-      () {
-        Navigator.pop(context);
-      },
-    );
+    Future.delayed(const Duration(milliseconds: 500), () {
+      Navigator.pop(context);
+    });
   }
 }

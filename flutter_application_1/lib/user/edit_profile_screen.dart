@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen({super.key, this.initialProfileImage});
+
+  final XFile? initialProfileImage;
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -16,12 +19,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   // CONTROLLERS
   // ==========================================================
 
+  final TextEditingController fullNameController = TextEditingController(
+    text: 'Rohit Sharma',
+  );
+
+  final TextEditingController locationController = TextEditingController(
+    text: 'Mumbai, India',
+  );
+
+  final TextEditingController profileImageNameController =
+      TextEditingController();
+
   final TextEditingController usernameController = TextEditingController(
-    text: 'Rohit',
+    text: 'rohit',
   );
 
   final TextEditingController emailController = TextEditingController(
-    text: 'abc@gmail.com',
+    text: 'owner@example.com',
   );
 
   final TextEditingController shopNameController = TextEditingController(
@@ -29,19 +43,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   );
 
   final TextEditingController phoneController = TextEditingController(
-    text: '9999999999',
+    text: '9876543210',
   );
 
-  final TextEditingController passwordController = TextEditingController(
-    text: 'password123',
-  );
+  XFile? profileImage;
+
+  @override
+  void initState() {
+    super.initState();
+    profileImage = widget.initialProfileImage;
+    profileImageNameController.text = profileImage?.name ?? '';
+  }
+
+  Future<void> _selectProfileImage() async {
+    final selectedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (selectedImage != null && mounted) {
+      setState(() {
+        profileImage = selectedImage;
+        profileImageNameController.text = selectedImage.name;
+      });
+    }
+  }
 
   // ==========================================================
-  // PASSWORD VISIBILITY
-  // ==========================================================
-
-  bool passwordVisible = false;
-
   // ==========================================================
   // FORM KEY
   // ==========================================================
@@ -50,11 +76,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void dispose() {
+    fullNameController.dispose();
+    locationController.dispose();
+    profileImageNameController.dispose();
     usernameController.dispose();
     emailController.dispose();
     shopNameController.dispose();
     phoneController.dispose();
-    passwordController.dispose();
 
     super.dispose();
   }
@@ -102,6 +130,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
+                _buildLabel(AppStrings.profileImage),
+
+                const SizedBox(height: 5),
+
+                _buildImageField(),
+
+                const SizedBox(height: 5),
+
+                // ==================================================
+                // FULL NAME
+                // ==================================================
+                _buildLabel(AppStrings.fullName),
+
+                const SizedBox(height: 5),
+
+                _buildTextField(
+                  controller: fullNameController,
+                  hintText: AppStrings.fullName,
+                  prefixIcon: Icons.person_outline,
+                  validator: (value) => value == null || value.trim().isEmpty
+                      ? 'Please enter full name'
+                      : null,
+                ),
+
+                const SizedBox(height: 5),
+
                 // ==================================================
                 // USERNAME
                 // ==================================================
@@ -167,31 +221,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 5),
 
                 // ==================================================
-                // SHOP NAME
-                // ==================================================
-                _buildLabel(AppStrings.shopNameLabel),
-
-                const SizedBox(height: 5),
-
-                _buildTextField(
-                  controller: shopNameController,
-
-                  hintText: AppStrings.shopNameHint,
-
-                  prefixIcon: Icons.home_outlined,
-
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return AppStrings.shopNameRequired;
-                    }
-
-                    return null;
-                  },
-                ),
-
-                const SizedBox(height: 5),
-
-                // ==================================================
                 // PHONE
                 // ==================================================
                 _buildLabel(AppStrings.phoneNumber),
@@ -225,13 +254,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 5),
 
                 // ==================================================
-                // PASSWORD
+                // SHOP NAME
                 // ==================================================
-                _buildLabel(AppStrings.password),
+                _buildLabel(AppStrings.shopNameLabel),
 
                 const SizedBox(height: 5),
 
-                _buildPasswordField(),
+                _buildTextField(
+                  controller: shopNameController,
+                  hintText: AppStrings.shopNameHint,
+                  prefixIcon: Icons.home_outlined,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return AppStrings.shopNameRequired;
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 5),
+
+                // ==================================================
+                // LOCATION
+                // ==================================================
+                _buildLabel(AppStrings.location),
+
+                const SizedBox(height: 5),
+
+                _buildTextField(
+                  controller: locationController,
+                  hintText: AppStrings.location,
+                  prefixIcon: Icons.location_on_outlined,
+                  validator: (value) => value == null || value.trim().isEmpty
+                      ? 'Please enter location'
+                      : null,
+                ),
+
+                const SizedBox(height: 5),
 
                 const SizedBox(height: 62),
 
@@ -294,17 +353,66 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   // NORMAL TEXT FIELD
   // ==========================================================
 
+  Widget _buildImageField() {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: _buildTextField(
+        controller: profileImageNameController,
+        hintText: AppStrings.uploadProfileImage,
+        prefixIcon: Icons.upload_file_outlined,
+        validator: (_) => null,
+        readOnly: true,
+        onTap: _selectProfileImage,
+        suffixIcon: profileImage == null
+            ? null
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FutureBuilder(
+                    future: profileImage!.readAsBytes(),
+                    builder: (context, snapshot) => SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: snapshot.hasData
+                          ? Image.memory(snapshot.data!, fit: BoxFit.cover)
+                          : const Icon(Icons.image_outlined, size: 20),
+                    ),
+                  ),
+                  IconButton(
+                    constraints: const BoxConstraints.tightFor(
+                      width: 32,
+                      height: 32,
+                    ),
+                    padding: EdgeInsets.zero,
+                    tooltip: AppStrings.removeImage,
+                    onPressed: () => setState(() {
+                      profileImage = null;
+                      profileImageNameController.clear();
+                    }),
+                    icon: const Icon(Icons.close, size: 18),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+
   Widget _buildTextField({
     required TextEditingController controller,
     required String hintText,
     required IconData prefixIcon,
     TextInputType? keyboardType,
     String? Function(String?)? validator,
+    bool readOnly = false,
+    VoidCallback? onTap,
+    Widget? suffixIcon,
   }) {
     return TextFormField(
       controller: controller,
 
       keyboardType: keyboardType,
+      readOnly: readOnly,
+      onTap: onTap,
 
       validator: validator,
 
@@ -317,90 +425,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
         prefixIcon: Icon(prefixIcon, size: 22, color: Colors.grey),
 
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 10,
-        ),
-
-        errorStyle: const TextStyle(fontSize: 10),
-
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-
-          borderSide: BorderSide(color: Colors.grey.shade500, width: 1.5),
-        ),
-
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-
-          borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
-        ),
-
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
-        ),
-
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(9),
-
-          borderSide: const BorderSide(color: Colors.red, width: 2),
-        ),
-      ),
-    );
-  }
-
-  // ==========================================================
-  // PASSWORD FIELD
-  // ==========================================================
-
-  Widget _buildPasswordField() {
-    return TextFormField(
-      controller: passwordController,
-
-      obscureText: !passwordVisible,
-
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return AppStrings.passwordRequired;
-        }
-
-        if (value.length < 8) {
-          return AppStrings.passwordMinLength;
-        }
-
-        return null;
-      },
-
-      style: const TextStyle(fontSize: 12),
-
-      decoration: InputDecoration(
-        hintText: AppStrings.passwordHint,
-
-        hintStyle: const TextStyle(fontSize: 12, color: Colors.grey),
-
-        prefixIcon: const Icon(
-          Icons.lock_outline,
-          size: 22,
-          color: Colors.grey,
-        ),
-
-        suffixIcon: IconButton(
-          onPressed: () {
-            setState(() {
-              passwordVisible = !passwordVisible;
-            });
-          },
-
-          icon: Icon(
-            passwordVisible ? Icons.visibility : Icons.visibility_off,
-
-            size: 20,
-
-            color: Colors.grey.shade700,
-          ),
-        ),
+        suffixIcon: suffixIcon,
 
         contentPadding: const EdgeInsets.symmetric(
           vertical: 12,
@@ -454,7 +479,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     // Return to Profile screen after update
     Future.delayed(const Duration(milliseconds: 800), () {
       if (mounted) {
-        Navigator.pop(context);
+        Navigator.pop(context, {'image': profileImage});
       }
     });
   }

@@ -3,6 +3,7 @@ import '../resources/app_colors.dart';
 import '../resources/app_images.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
+import 'package:flutter_application_1/navigation/main_screen.dart';
 
 class AboutAppScreen extends StatelessWidget {
   const AboutAppScreen({super.key});
@@ -93,13 +94,13 @@ class AboutAppScreen extends StatelessWidget {
           ),
 
           // BOTTOM NAVIGATION
-          _buildBottomNavigation(),
+          _buildBottomNavigation(context),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavigation() {
+  Widget _buildBottomNavigation(BuildContext context) {
     return Container(
       height: 66,
       decoration: BoxDecoration(
@@ -110,33 +111,43 @@ class AboutAppScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildNavItem(
+            context: context,
             icon: Icons.home_outlined,
             label: AppStrings.dashboard,
             selected: false,
+            index: 0,
           ),
 
           _buildNavItem(
+            context: context,
             icon: Icons.inventory_2_outlined,
             label: AppStrings.product,
             selected: false,
+            index: 1,
           ),
 
           _buildNavItem(
+            context: context,
             icon: Icons.inventory_2,
             label: AppStrings.stock,
             selected: true,
+            index: 2,
           ),
 
           _buildNavItem(
+            context: context,
             icon: Icons.shopping_cart_outlined,
             label: AppStrings.sales,
             selected: false,
+            index: 3,
           ),
 
           _buildNavItem(
+            context: context,
             icon: Icons.person_outline,
             label: AppStrings.settings,
             selected: false,
+            index: 4,
           ),
         ],
       ),
@@ -144,29 +155,43 @@ class AboutAppScreen extends StatelessWidget {
   }
 
   Widget _buildNavItem({
+    required BuildContext context,
     required IconData icon,
     required String label,
     required bool selected,
+    required int index,
   }) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 25,
-          color: selected ? AppColors.primaryColor : Colors.grey,
-        ),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => MainScreen(initialIndex: index)),
+            (route) => false,
+          );
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 25,
+              color: selected ? AppColors.primaryColor : Colors.grey,
+            ),
 
-        const SizedBox(height: 2),
+            const SizedBox(height: 2),
 
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            color: selected ? AppColors.primaryColor : Colors.grey,
-          ),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                color: selected ? AppColors.primaryColor : Colors.grey,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

@@ -11,8 +11,47 @@ class UpdateStockScreen extends StatefulWidget {
 }
 
 class _UpdateStockScreenState extends State<UpdateStockScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _quantityController = TextEditingController();
   String? selectedProduct;
   bool addStock = true;
+
+  int? get _currentStock => switch (selectedProduct) {
+    'Bangles' => 1000,
+    'Jhumkha' => 500,
+    _ => null,
+  };
+
+  @override
+  void dispose() {
+    _quantityController.dispose();
+    super.dispose();
+  }
+
+  String? _validateProduct(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppStrings.productSelectionRequired;
+    }
+    return null;
+  }
+
+  String? _validateQuantity(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.quantityRequired;
+    }
+
+    final quantity = int.tryParse(value.trim());
+    if (quantity == null) {
+      return AppStrings.validWholeNumberRequired;
+    }
+    if (quantity <= 0) {
+      return AppStrings.quantityMustBePositive;
+    }
+    if (!addStock && _currentStock != null && quantity > _currentStock!) {
+      return AppStrings.stockReductionExceedsCurrentStock;
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +71,11 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
         ),
       ),
 
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(38, 30, 38, 20),
-        child: Column(
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(38, 30, 38, 20),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Product
@@ -55,10 +96,23 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: AppColors.errorColor),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: AppColors.errorColor),
+                ),
+                errorStyle: TextStyle(
+                  fontSize: AppSizes.extraSmall,
+                  color: AppColors.errorColor,
+                ),
               ),
+              validator: _validateProduct,
               items: const [
-                DropdownMenuItem(value: 'Product 1', child: Text('Product 1')),
-                DropdownMenuItem(value: 'Product 2', child: Text('Product 2')),
+                DropdownMenuItem(value: 'Bangles', child: Text('Bangles')),
+                DropdownMenuItem(value: 'Jhumkha', child: Text('Jhumkha')),
               ],
               onChanged: (value) {
                 setState(() {
@@ -90,7 +144,33 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
                         ),
                       ),
                       Text(
-                        '20',
+                        _currentStock?.toString() ?? '—',
+                        style: TextStyle(
+                          fontSize: AppSizes.body,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.productCode,
+                        style: TextStyle(
+                          fontSize: AppSizes.small,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        selectedProduct == null
+                            ? '—'
+                            : selectedProduct == 'Jhumkha'
+                            ? 'PRD-0002'
+                            : 'PRD-0001',
                         style: TextStyle(
                           fontSize: AppSizes.body,
                           fontWeight: FontWeight.bold,
@@ -112,7 +192,7 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
                         ),
                       ),
                       Text(
-                        '5',
+                        selectedProduct == null ? '—' : '100',
                         style: TextStyle(
                           fontSize: AppSizes.body,
                           fontWeight: FontWeight.bold,
@@ -170,14 +250,28 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
 
             const SizedBox(height: 6),
 
-            TextField(
+            TextFormField(
+              controller: _quantityController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: AppStrings.enterQuantity,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: AppColors.errorColor),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: AppColors.errorColor),
+                ),
+                errorStyle: TextStyle(
+                  fontSize: AppSizes.extraSmall,
+                  color: AppColors.errorColor,
+                ),
               ),
+              validator: _validateQuantity,
             ),
 
             const SizedBox(height: 16),
@@ -211,6 +305,7 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
+                  _formKey.currentState!.validate();
                   // Update stock logic will come later
                 },
                 style: ElevatedButton.styleFrom(
@@ -229,7 +324,8 @@ class _UpdateStockScreenState extends State<UpdateStockScreen> {
                 ),
               ),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );

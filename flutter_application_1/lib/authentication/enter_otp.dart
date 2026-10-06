@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
-import 'package:flutter_application_1/screen/login_screen.dart';
+import 'package:flutter_application_1/authentication/login_screen.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+
+class EnterOtp extends StatefulWidget {
+  const EnterOtp({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<EnterOtp> createState() => _EnterOtpState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final _formKey = GlobalKey<FormState>();
+class _EnterOtpState extends State<EnterOtp> { 
 
-  final TextEditingController emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController otpcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,51 +23,52 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       backgroundColor: AppColors.backgroundColor,
 
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-
+        padding: const EdgeInsets.symmetric(
+          horizontal: 50, 
+          vertical: 10
+        ),
 
         child: Form(
           key: _formKey,
-
           child: Column(
+
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-
               const SizedBox(height: 80),
 
               // Back Arrow
-              // IconButton(
-              //   onPressed: () {
-              //     Navigator.pop(context);
-              //   }, 
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                }, 
 
-              //   icon: const Icon(
-              //     Icons.arrow_back,
-              //     size: 30,
-              //     color: AppColors.textColor,
-              //   ),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: AppColors.textColor,
+                ),
 
-              //   padding: EdgeInsets.zero,
-              //   alignment: Alignment.centerLeft,
-              // ),
+                padding: EdgeInsets.zero,
+                alignment: Alignment.centerLeft,
+              ),
 
               const SizedBox(height: 50),
 
               const Text(
-                AppStrings.for_pass_title,
+                AppStrings.enterotp,
                 style: TextStyle(
                   fontSize: AppSizes.title,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
 
               const Text(
-                AppStrings.next_line_of_fp,
+                AppStrings.next_line_of_enterotp,
                 style: TextStyle(
-                  fontSize: AppSizes.small, 
+                  fontSize: AppSizes.small,
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -74,47 +76,48 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               const SizedBox(height: 50),
 
               const Text(
-                AppStrings.only_email,
+                AppStrings.otp,
                 style: TextStyle(
-                  fontSize: AppSizes.extraSmall, 
-                  fontWeight: FontWeight.bold
+                  fontSize: AppSizes.extraSmall,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
 
-              // Email field
+              // OTP field
               TextFormField(
-                controller: emailController,
+                controller: otpcontroller,
 
                 decoration: InputDecoration(
-                  hintText: 'abc@gmail.com',
-
-                  prefixIcon: const Icon(
-                    Icons.email_outlined,
-                    color: AppColors.greyColor,
-                  ),
+                  hintText: 'eg.123456',
 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
 
-                // Email validation
+                // VAlidation of otp field
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
+                  if (value == null || value.trim().isEmpty){
+                    return 'Please enter OTP';
                   }
 
-                  if (!value.contains('@')) {
-                    return 'Please enter a valid email';
+                  if (value.length != 6){
+                    return 'OTP must be 6 digits';
+                  }
+
+                  if (!RegExp(r'^[0-9]+$').hasMatch(value)){
+                    return 'OTP must contain only numbers';
                   }
 
                   return null;
                 },
               ),
 
-              const SizedBox(height: 35,),
+              
+              
 
-              // send otp button
+              const SizedBox(height: 25),
+
               SizedBox(
                 width: double.infinity,
                 height: 48,
@@ -140,7 +143,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
 
                   child: const Text(
-                    AppStrings.send_otp,
+                    AppStrings.verify,
                     style: TextStyle(
                       fontSize: AppSizes.body,
                       fontWeight: FontWeight.bold,
@@ -149,7 +152,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
               ),
 
-              const SizedBox(height: 25,),
+              const SizedBox(height: 25),
 
               // Back to login
               Align(
@@ -157,10 +160,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                 child: TextButton(
                   onPressed: () {
-                    // back to login
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen())
+                      MaterialPageRoute(
+                        builder: (_) => const LoginScreen(),
+                      ),
+                      (route) => false,
                     );
                   },
 
@@ -174,8 +179,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
               ),
             ],
-          ),
+
+          )
         ),
+
       ),
     );
   }

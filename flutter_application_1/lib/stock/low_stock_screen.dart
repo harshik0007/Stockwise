@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
+import 'update_stock_screen.dart';
 
 class LowStockScreen extends StatelessWidget {
   const LowStockScreen({super.key});
@@ -83,17 +84,25 @@ class LowStockScreen extends StatelessWidget {
                   const SizedBox(height: 32),
 
                   // PRODUCT 1
-                  _buildStockItem(
-                    productName: AppStrings.jhumkha,
-                    stock: '1',
-                    minimum: '5',
+                  InkWell(
+                    onTap: () => _openUpdateStock(context),
+                    child: _buildStockItem(
+                      productCode: 'PRD-0002',
+                      productName: AppStrings.jhumkha,
+                      stock: '1',
+                      minimum: '5',
+                    ),
                   ),
 
                   // PRODUCT 2
-                  _buildStockItem(
-                    productName: AppStrings.bengals,
-                    stock: '8',
-                    minimum: '10',
+                  InkWell(
+                    onTap: () => _openUpdateStock(context),
+                    child: _buildStockItem(
+                      productCode: 'PRD-0001',
+                      productName: AppStrings.bengals,
+                      stock: '8',
+                      minimum: '10',
+                    ),
                   ),
                 ],
               ),
@@ -101,13 +110,20 @@ class LowStockScreen extends StatelessWidget {
           ),
 
           // BOTTOM NAVIGATION
-          
         ],
       ),
     );
   }
 
+  void _openUpdateStock(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const UpdateStockScreen()),
+    );
+  }
+
   Widget _buildStockItem({
+    required String productCode,
     required String productName,
     required String stock,
     required String minimum,
@@ -147,7 +163,7 @@ class LowStockScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productName,
+                  '$productCode  $productName',
                   style: TextStyle(
                     fontSize: AppSizes.extraSmall,
                     fontWeight: FontWeight.bold,
@@ -180,6 +196,4 @@ class LowStockScreen extends StatelessWidget {
       ),
     );
   }
-
-  
 }

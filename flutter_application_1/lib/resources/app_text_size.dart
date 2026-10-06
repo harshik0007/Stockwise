@@ -47,6 +47,11 @@ class AppSizes {
 
   static const double buttonElevation = 7;
 
+  static const double buttonHorizontalPadding = 24;
+
+  static const double buttonBottomPadding = 24;
+
+  static const double saveButtonHeight = 58;
   // // App Bar
   // static const double appBarHeight = 52;
 
@@ -79,23 +84,17 @@ class AppSizes {
   static const double labelSpacing = 3;
 
   // Save button
-  static const double saveButtonHeight = 31;
-
   static const double saveButtonRadius = 8;
 
   static const double saveButtonTextSize = 13;
 
   static const double saveButtonElevation = 7;
 
-  
-
-
   // ================= PAGE =================
 
   static const double detailsHorizontalPadding = 20;
 
   static const double detailsTopSpacing = 39;
-
 
   // ================= PRODUCT IMAGE =================
 
@@ -105,13 +104,11 @@ class AppSizes {
 
   static const double productImageRadius = 7;
 
-
   // ================= PRODUCT NAME =================
 
   static const double productNameSpacing = 5;
 
   static const double productNameSize = 12;
-
 
   // ================= DETAILS =================
 
@@ -121,27 +118,17 @@ class AppSizes {
 
   static const double detailRowHeight = 20;
 
-
   // ================= BUTTONS =================
 
-  
-
   static const double buttonWidth = 92;
-  
-  
-
-  
 
   static const double buttonTextSize = 13;
- 
-
 
   // ================= PAGE =================
 
   static const double pricePagePadding = 10;
 
   static const double priceTopSpacing = 28;
-
 
   // ================= PRICE BOX =================
 
@@ -150,7 +137,6 @@ class AppSizes {
   static const double priceBoxRadius = 6;
 
   static const double priceBoxTextSize = 8;
-
 
   // ================= RANGE BUTTON =================
 
@@ -161,7 +147,6 @@ class AppSizes {
   static const double rangeButtonRadius = 15;
 
   static const double rangeTextSize = 8;
-
 
   // ================= BOTTOM BUTTON =================
 
@@ -174,6 +159,4 @@ class AppSizes {
   static const double bottomButtonTextSize = 14;
 
   static const double bottomButtonElevation = 6;
-  
-
 }

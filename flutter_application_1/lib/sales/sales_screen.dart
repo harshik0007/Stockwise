@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
+
+import 'analytics_screen.dart';
+import 'record_sales_screen.dart';
 
 class SalesScreen extends StatelessWidget {
   const SalesScreen({super.key});
@@ -16,14 +20,6 @@ class SalesScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         elevation: 0,
-
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back, size: 30),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
-
         title: Text(
           AppStrings.sales,
           style: TextStyle(
@@ -45,7 +41,14 @@ class SalesScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 38,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const RecordSalesScreen(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFEAF0FF),
                         foregroundColor: AppColors.primaryColor,
@@ -103,16 +106,18 @@ class SalesScreen extends StatelessWidget {
                   // SALE 1
                   _buildSaleCard(
                     date: '19 July 2026',
+                    productCode: 'PRD-0002',
                     productName: AppStrings.jhumkha,
                     quantity: '5',
                     amount: 'Rs.1000',
                   ),
 
-                  const SizedBox(height: 9),
+                  const SizedBox(height: 8),
 
                   // SALE 2
                   _buildSaleCard(
                     date: '19 July 2026',
+                    productCode: 'PRD-0001',
                     productName: AppStrings.bengals,
                     quantity: '20',
                     amount: 'Rs.4000',
@@ -158,7 +163,14 @@ class SalesScreen extends StatelessWidget {
                         width: 82,
                         height: 34,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AnalyticsScreen(),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFEAF0FF),
                             foregroundColor: AppColors.primaryColor,
@@ -187,24 +199,26 @@ class SalesScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          // BOTTOM NAVIGATION
-          
         ],
       ),
     );
   }
 
+  // =================================================
+  // SALE CARD
+  // =================================================
+
   Widget _buildSaleCard({
     required String date,
+    required String productCode,
     required String productName,
     required String quantity,
     required String amount,
   }) {
     return Container(
       width: double.infinity,
-      height: 66,
-      padding: const EdgeInsets.fromLTRB(8, 7, 8, 6),
+      height: 78,
+      padding: const EdgeInsets.fromLTRB(8, 6, 8, 5),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.grey.shade200),
@@ -229,9 +243,17 @@ class SalesScreen extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 2),
+          const SizedBox(height: 1),
 
-          // PRODUCT
+          // PRODUCT CODE
+          Text(
+            '${AppStrings.productCode}: $productCode',
+            style: TextStyle(fontSize: 8, color: Colors.grey.shade600),
+          ),
+
+          const SizedBox(height: 1),
+
+          // PRODUCT NAME
           Text(
             productName,
             style: TextStyle(
@@ -240,7 +262,7 @@ class SalesScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 2),
+          const SizedBox(height: 1),
 
           // BOTTOM QTY + PRICE
           Row(
@@ -265,6 +287,4 @@ class SalesScreen extends StatelessWidget {
       ),
     );
   }
-
-  
 }

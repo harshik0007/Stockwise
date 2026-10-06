@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screen/add_product.dart';
-import 'package:flutter_application_1/screen/dashboard_screen.dart';
-import 'package:flutter_application_1/screen/price_range.dart';
-import 'package:flutter_application_1/screen/product_details1.dart';
+
+import 'package:flutter_application_1/product/add_product.dart';
+import 'package:flutter_application_1/product/price_range.dart';
+import 'package:flutter_application_1/product/product_details1.dart';
 
 import '../resources/app_colors.dart';
+import '../resources/app_images.dart';
+import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -26,28 +28,29 @@ class _ProductScreenState extends State<ProductScreen> {
   // ==========================================================
 
   final List<Map<String, dynamic>> products = [
-  {
-    'name': 'Bangles',
-    'category': 'Bangles',
-    'purchasePrice': '₹80',
-    'price': '149',
-    'stock': '1000',
-    'minimumStock': '100',
-    'description': 'Golden bangles',
-    'image': 'assets/images/img1.jpg',
-  },
-
-  {
-    'name': 'Jhumkha',
-    'category': 'Jhumkha',
-    'purchasePrice': '₹109',
-    'price': '149',
-    'stock': '500',
-    'minimumStock': '100',
-    'description': 'Golden Jhumkha',
-    'image': 'assets/images/img2.jpg',
-  },
-];
+    {
+      'code': 'PRD-0001',
+      'name': 'Bangles',
+      'category': 'Bangles',
+      'purchasePrice': '₹80',
+      'price': '149',
+      'stock': '1000',
+      'minimumStock': '100',
+      'description': 'Golden bangles',
+      'image': AppImages.bangle,
+    },
+    {
+      'code': 'PRD-0002',
+      'name': 'Jhumkha',
+      'category': 'Jhumkha',
+      'purchasePrice': '₹109',
+      'price': '149',
+      'stock': '500',
+      'minimumStock': '100',
+      'description': 'Golden Jhumkha',
+      'image': AppImages.jumka,
+    },
+  ];
 
   String searchText = '';
 
@@ -81,22 +84,8 @@ class _ProductScreenState extends State<ProductScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
 
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back, size: 28),
-
-        //   onPressed: () {
-        //         Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             builder: (context) => const DashboardScreen(),
-        //           ),
-        //         );
-        //       },
-        // ),
-
         title: Text(
           'Products',
-
           style: TextStyle(
             fontSize: AppSizes.title,
             fontWeight: FontWeight.bold,
@@ -106,15 +95,12 @@ class _ProductScreenState extends State<ProductScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.add, size: 25),
-
             onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AddProductPage(),
-                  ),
-                );
-              },
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddProductPage()),
+              );
+            },
           ),
         ],
       ),
@@ -129,7 +115,6 @@ class _ProductScreenState extends State<ProductScreen> {
           // ==================================================
           SizedBox(
             height: 36,
-
             child: Row(
               children: [
                 // SORT
@@ -138,20 +123,16 @@ class _ProductScreenState extends State<ProductScreen> {
                     onTap: () {
                       _showSortOptions(context);
                     },
-
                     child: Container(
                       alignment: Alignment.center,
-
                       decoration: BoxDecoration(
                         border: Border(
                           right: BorderSide(color: Colors.grey.shade300),
                           bottom: BorderSide(color: Colors.grey.shade300),
                         ),
                       ),
-
                       child: const Text(
                         'Sort',
-
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -167,19 +148,15 @@ class _ProductScreenState extends State<ProductScreen> {
                     onTap: () {
                       _showPriceRange();
                     },
-
                     child: Container(
                       alignment: Alignment.center,
-
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(color: Colors.grey.shade300),
                         ),
                       ),
-
                       child: const Text(
                         'Prize Range',
-
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -197,26 +174,19 @@ class _ProductScreenState extends State<ProductScreen> {
           // ==================================================
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
-
             child: SizedBox(
               height: 34,
-
               child: TextField(
                 controller: searchController,
-
                 onChanged: (value) {
                   setState(() {
                     searchText = value;
                   });
                 },
-
                 decoration: InputDecoration(
                   hintText: 'Search here...',
-
                   hintStyle: const TextStyle(fontSize: 12, color: Colors.grey),
-
                   prefixIcon: const Icon(Icons.search, size: 21),
-
                   suffixIcon: searchText.isNotEmpty
                       ? IconButton(
                           icon: const Icon(Icons.close, size: 17),
@@ -229,21 +199,15 @@ class _ProductScreenState extends State<ProductScreen> {
                           },
                         )
                       : null,
-
                   contentPadding: const EdgeInsets.symmetric(vertical: 5),
-
                   filled: true,
                   fillColor: Colors.white,
-
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-
                     borderSide: BorderSide(color: Colors.grey.shade500),
                   ),
-
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-
                     borderSide: BorderSide(
                       color: AppColors.primaryColor,
                       width: 1.5,
@@ -270,9 +234,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       horizontal: 10,
                       vertical: 2,
                     ),
-
                     itemCount: filteredProducts.length,
-
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
 
@@ -284,217 +246,136 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
-// ==========================================================
-// PRODUCT CARD
-// ==========================================================
 
-Widget _buildProductCard(
-    Map<String, dynamic> product) {
+  // ==========================================================
+  // PRODUCT CARD
+  // ==========================================================
 
-  return InkWell(
+  Widget _buildProductCard(Map<String, dynamic> product) {
+    return InkWell(
+      // ======================================================
+      // CLICK PRODUCT CARD
+      // ======================================================
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailsPage(
+              productName: product['name'].toString(),
+              productCode: product['code'].toString(),
+              category: product['category'].toString(),
+              purchasePrice: product['purchasePrice'].toString(),
+              sellingPrice: product['price'].toString(),
+              stock: product['stock'].toString(),
+              minimumStock: product['minimumStock'].toString(),
+              description: product['description'].toString(),
+              image: product['image'].toString(),
+            ),
+          ),
+        );
+      },
 
-    // ======================================================
-    // CLICK PRODUCT CARD
-    // ======================================================
+      borderRadius: BorderRadius.circular(8),
 
-    onTap: () {
+      // ======================================================
+      // PRODUCT CARD CONTAINER
+      // ======================================================
+      child: Container(
+        height: 82,
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey.shade300),
+        ),
 
-      Navigator.push(
-        context,
-
-        MaterialPageRoute(
-          builder: (context) =>
-              ProductDetailsPage(
-
-            productName:
-                product['name'].toString(),
-
-            category:
-                product['category'].toString(),
-
-            purchasePrice:
-                product['purchasePrice'].toString(),
-
-            sellingPrice:
-                product['price'].toString(),
-
-            stock:
-                product['stock'].toString(),
-
-            minimumStock:
-                product['minimumStock'].toString(),
-
-            description:
-                product['description'].toString(),
-
-            image:
+        child: Row(
+          children: [
+            // ==================================================
+            // PRODUCT IMAGE
+            // ==================================================
+            ClipRRect(
+              borderRadius: BorderRadius.circular(7),
+              child: Image.asset(
                 product['image'].toString(),
-          ),
-        ),
-      );
-    },
-
-    borderRadius:
-        BorderRadius.circular(8),
-
-    // ======================================================
-    // PRODUCT CARD CONTAINER
-    // ======================================================
-
-    child: Container(
-
-      height: 74,
-
-      margin:
-          const EdgeInsets.only(
-        bottom: 10,
-      ),
-
-      padding:
-          const EdgeInsets.all(5),
-
-      decoration:
-          BoxDecoration(
-
-        color: Colors.white,
-
-        borderRadius:
-            BorderRadius.circular(8),
-
-        border: Border.all(
-          color:
-              Colors.grey.shade300,
-        ),
-      ),
-
-      child: Row(
-        children: [
-
-          // ==================================================
-          // PRODUCT IMAGE
-          // ==================================================
-
-          ClipRRect(
-
-            borderRadius:
-                BorderRadius.circular(7),
-
-            child: Image.asset(
-
-              product['image'].toString(),
-
-              width: 56,
-
-              height: 64,
-
-              fit: BoxFit.cover,
-
-              errorBuilder:
-                  (context, error, stackTrace) {
-
-                return Container(
-
-                  width: 56,
-
-                  height: 64,
-
-                  color:
-                      Colors.grey.shade200,
-
-                  child: const Icon(
-
-                    Icons.image_outlined,
-
-                    color:
-                        Colors.grey,
-
-                    size: 30,
-                  ),
-                );
-              },
+                width: 56,
+                height: 64,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 56,
+                    height: 64,
+                    color: Colors.grey.shade200,
+                    child: const Icon(
+                      Icons.image_outlined,
+                      color: Colors.grey,
+                      size: 30,
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
 
-          const SizedBox(
-            width: 10,
-          ),
+            const SizedBox(width: 10),
 
-          // ==================================================
-          // PRODUCT INFORMATION
-          // ==================================================
-
-          Expanded(
-
-            child: Column(
-
-              mainAxisAlignment:
-                  MainAxisAlignment.center,
-
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
-
-              children: [
-
-                Text(
-
-                  'Product Name :- '
-                  '${product['name']}',
-
-                  style:
-                      const TextStyle(
-
-                    fontSize: 8,
-
-                    fontWeight:
-                        FontWeight.bold,
+            // ==================================================
+            // PRODUCT INFORMATION
+            // ==================================================
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${AppStrings.productCode}: ${product['code']}',
+                    style: const TextStyle(fontSize: 8, color: Colors.grey),
                   ),
-                ),
 
-                const SizedBox(
-                  height: 5,
-                ),
+                  const SizedBox(height: 3),
 
-                Text(
-
-                  'Stock :- '
-                  '${product['stock']}',
-
-                  style:
-                      const TextStyle(
-
-                    fontSize: 8,
-
-                    fontWeight:
-                        FontWeight.bold,
+                  Text(
+                    'Product Name :- ${product['name']}',
+                    style: const TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
 
-                const SizedBox(
-                  height: 5,
-                ),
+                  const SizedBox(height: 3),
 
-                Text(
-
-                  'One piece price:- ₹'
-                  '${product['price']}',
-
-                  style:
-                      const TextStyle(
-
-                    fontSize: 8,
-
-                    fontWeight:
-                        FontWeight.bold,
+                  Text(
+                    '${AppStrings.category}: ${product['category']}',
+                    style: const TextStyle(fontSize: 8),
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 3),
+
+                  Text(
+                    'Stock :- ${product['stock']}',
+                    style: const TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  Text(
+                    'One piece price:- ₹${product['price']}',
+                    style: const TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   // ==========================================================
   // SORT OPTIONS
@@ -503,26 +384,21 @@ Widget _buildProductCard(
   void _showSortOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
-
       builder: (context) {
         return SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-
             children: [
               const Padding(
                 padding: EdgeInsets.all(15),
-
                 child: Text(
                   'Sort Products',
-
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
 
               ListTile(
                 title: const Text('Name: A to Z'),
-
                 onTap: () {
                   setState(() {
                     products.sort((a, b) => a['name'].compareTo(b['name']));
@@ -534,7 +410,6 @@ Widget _buildProductCard(
 
               ListTile(
                 title: const Text('Price: Low to High'),
-
                 onTap: () {
                   setState(() {
                     products.sort((a, b) => a['price'].compareTo(b['price']));
@@ -546,7 +421,6 @@ Widget _buildProductCard(
 
               ListTile(
                 title: const Text('Price: High to Low'),
-
                 onTap: () {
                   setState(() {
                     products.sort((a, b) => b['price'].compareTo(a['price']));
@@ -567,11 +441,9 @@ Widget _buildProductCard(
   // ==========================================================
 
   void _showPriceRange() {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const PriceRangePage(),
-    ),
-  );
-}
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PriceRangePage()),
+    );
+  }
 }

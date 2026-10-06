@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screen/edit_profile_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_application_1/user/edit_profile_screen.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 import '../resources/app_text_size.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  XFile? profileImage;
 
   @override
   Widget build(BuildContext context) {
@@ -57,37 +65,50 @@ class ProfileScreen extends StatelessWidget {
 
                 backgroundColor: const Color(0xFFA8D0FF),
 
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: profileImage == null
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Head
+                          Container(
+                            width: 40,
+                            height: 40,
 
-                  children: [
-                    // Head
-                    Container(
-                      width: 40,
-                      height: 40,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF0874E8),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
 
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF0874E8),
-                        shape: BoxShape.circle,
+                          // Body
+                          Container(
+                            width: 70,
+                            height: 40,
+
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF0874E8),
+
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(40),
+                                topRight: Radius.circular(40),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : FutureBuilder(
+                        future: profileImage!.readAsBytes(),
+                        builder: (context, snapshot) => snapshot.hasData
+                            ? ClipOval(
+                                child: Image.memory(
+                                  snapshot.data!,
+                                  width: 114,
+                                  height: 114,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : const Icon(Icons.person, color: Colors.white),
                       ),
-                    ),
-
-                    // Body
-                    Container(
-                      width: 70,
-                      height: 40,
-
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF0874E8),
-
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
 
               const SizedBox(height: 20),
@@ -96,7 +117,7 @@ class ProfileScreen extends StatelessWidget {
               // OWNER NAME
               // =================================================
               const Text(
-                AppStrings.ownerName,
+                AppStrings.ownerFullName,
 
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
@@ -107,7 +128,7 @@ class ProfileScreen extends StatelessWidget {
               // ROLE
               // =================================================
               const Text(
-                AppStrings.role,
+                AppStrings.ownerRole,
 
                 style: TextStyle(fontSize: 14, color: Colors.black87),
               ),
@@ -130,11 +151,18 @@ class ProfileScreen extends StatelessWidget {
 
                 child: Column(
                   children: [
-                    // SHOP NAME
                     _buildProfileRow(
-                      icon: Icons.home_outlined,
-                      title: AppStrings.shopName,
-                      value: AppStrings.example,
+                      icon: Icons.person_outline,
+                      title: AppStrings.fullName,
+                      value: AppStrings.ownerFullName,
+                    ),
+
+                    Divider(height: 1, color: Colors.grey.shade400),
+
+                    _buildProfileRow(
+                      icon: Icons.badge_outlined,
+                      title: AppStrings.username,
+                      value: AppStrings.ownerUsername,
                     ),
 
                     Divider(height: 1, color: Colors.grey.shade400),
@@ -154,6 +182,22 @@ class ProfileScreen extends StatelessWidget {
                       title: AppStrings.phone,
                       value: AppStrings.ownerPhone,
                     ),
+
+                    Divider(height: 1, color: Colors.grey.shade400),
+
+                    _buildProfileRow(
+                      icon: Icons.home_outlined,
+                      title: AppStrings.shopName,
+                      value: AppStrings.ownerShopName,
+                    ),
+
+                    Divider(height: 1, color: Colors.grey.shade400),
+
+                    _buildProfileRow(
+                      icon: Icons.location_on_outlined,
+                      title: AppStrings.location,
+                      value: AppStrings.ownerLocation,
+                    ),
                   ],
                 ),
               ),
@@ -168,15 +212,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 40,
 
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-
-                      MaterialPageRoute(
-                        builder: (context) => const EditProfileScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: _openEditProfile,
 
                   icon: const SizedBox.shrink(),
 
@@ -234,6 +270,19 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _openEditProfile() async {
+    final result = await Navigator.push<Map<String, XFile?>>(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            EditProfileScreen(initialProfileImage: profileImage),
+      ),
+    );
+    if (result != null && mounted) {
+      setState(() => profileImage = result['image']);
+    }
   }
 
   // ==========================================================

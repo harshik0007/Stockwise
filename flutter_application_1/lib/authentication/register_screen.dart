@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -21,12 +22,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // Controllers
   // -------------------------------------------------------
 
+  final fullNameController = TextEditingController();
+  final profileImageNameController = TextEditingController();
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final shopController = TextEditingController();
   final phoneController = TextEditingController();
+  final locationController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  XFile? profileImage;
 
   // -------------------------------------------------------
   // Password visibility
@@ -35,12 +40,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
 
+  Future<void> selectProfileImage() async {
+    final selectedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (selectedImage != null && mounted) {
+      setState(() {
+        profileImage = selectedImage;
+        profileImageNameController.text = selectedImage.name;
+      });
+    }
+  }
+
   @override
   void dispose() {
+    fullNameController.dispose();
+    profileImageNameController.dispose();
     usernameController.dispose();
     emailController.dispose();
     shopController.dispose();
     phoneController.dispose();
+    locationController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
 
@@ -86,7 +106,74 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
+
+                  const Text(
+                    AppStrings.profileImage,
+                    style: TextStyle(
+                      fontSize: AppSizes.small,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textColor,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  profileImageSelector(),
+
+                  const SizedBox(height: 6),
+
+                  // ---------------- FULL NAME ----------------
+                  const Text(
+                    AppStrings.fullName,
+                    style: TextStyle(
+                      fontSize: AppSizes.small,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textColor,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  buildTextField(
+                    controller: fullNameController,
+                    hintText: AppStrings.fullName,
+                    icon: Icons.person_outline,
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? 'Please enter full name'
+                        : null,
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  // ---------------- SHOP NAME ----------------
+                  const Text(
+                    AppStrings.shopname,
+                    style: TextStyle(
+                      fontSize: AppSizes.small,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textColor,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  buildTextField(
+                    controller: shopController,
+                    hintText: 'XYZ Shop',
+                    icon: Icons.home_outlined,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter shop name';
+                      }
+                      if (value.trim().length < 2) {
+                        return 'Shop name must be at least 2 characters';
+                      }
+                      return null;
+                    },
+                  ),
+
+                  const SizedBox(height: 6),
 
                   // ---------------- USERNAME ----------------
                   const Text(
@@ -161,38 +248,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   const SizedBox(height: 6),
 
-                  // ---------------- SHOP NAME ----------------
-                  const Text(
-                    AppStrings.shopname,
-                    style: TextStyle(
-                      fontSize: AppSizes.small,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textColor,
-                    ),
-                  ),
-
-                  const SizedBox(height: 6),
-
-                  buildTextField(
-                    controller: shopController,
-                    hintText: 'XYZ Shop',
-                    icon: Icons.home_outlined,
-
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Please enter shop name';
-                      }
-
-                      if (value.trim().length < 2) {
-                        return 'Shop name must be at least 2 characters';
-                      }
-
-                      return null;
-                    },
-                  ),
-
-                  const SizedBox(height: 6),
-
                   // ---------------- PHONE ----------------
                   const Text(
                     AppStrings.phoneNo,
@@ -243,6 +298,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       return null;
                     },
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  // ---------------- LOCATION ----------------
+                  const Text(
+                    AppStrings.location,
+                    style: TextStyle(
+                      fontSize: AppSizes.small,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textColor,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  buildTextField(
+                    controller: locationController,
+                    hintText: AppStrings.location,
+                    icon: Icons.location_on_outlined,
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? 'Please enter location'
+                        : null,
                   ),
 
                   const SizedBox(height: 6),
@@ -389,6 +467,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
 
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(AppStrings.alreadyHaveAccount),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            AppStrings.login,
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
                   const SizedBox(height: 30),
                 ],
               ),
@@ -403,6 +500,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // TEXT FORM FIELD
   // =======================================================
 
+  Widget profileImageSelector() {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: buildTextField(
+        controller: profileImageNameController,
+        hintText: AppStrings.uploadProfileImage,
+        icon: Icons.upload_file_outlined,
+        readOnly: true,
+        onTap: selectProfileImage,
+        validator: (_) => null,
+        suffixIcon: profileImage == null
+            ? null
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FutureBuilder(
+                    future: profileImage!.readAsBytes(),
+                    builder: (context, snapshot) => SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: snapshot.hasData
+                          ? Image.memory(snapshot.data!, fit: BoxFit.cover)
+                          : const Icon(Icons.image_outlined, size: 20),
+                    ),
+                  ),
+                  IconButton(
+                    constraints: const BoxConstraints.tightFor(
+                      width: 32,
+                      height: 32,
+                    ),
+                    padding: EdgeInsets.zero,
+                    tooltip: AppStrings.removeImage,
+                    onPressed: () => setState(() {
+                      profileImage = null;
+                      profileImageNameController.clear();
+                    }),
+                    icon: const Icon(Icons.close, size: 18),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+
   Widget buildTextField({
     required TextEditingController controller,
     required String hintText,
@@ -412,6 +553,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     bool obscureText = false,
     Widget? suffixIcon,
+    bool readOnly = false,
+    VoidCallback? onTap,
 
     TextInputType keyboardType = TextInputType.text,
   }) {
@@ -419,6 +562,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       controller: controller,
 
       obscureText: obscureText,
+
+      readOnly: readOnly,
+      onTap: onTap,
 
       keyboardType: keyboardType,
 

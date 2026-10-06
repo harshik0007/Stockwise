@@ -11,9 +11,71 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _oldPasswordController = TextEditingController();
+  final _newPasswordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
   bool oldPasswordVisible = false;
   bool newPasswordVisible = false;
   bool confirmPasswordVisible = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _oldPasswordController.dispose();
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.emailRequired;
+    }
+    if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(value.trim())) {
+      return AppStrings.validEmail;
+    }
+    return null;
+  }
+
+  String? _validateOldPassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.passwordRequired;
+    }
+    return null;
+  }
+
+  String? _validateNewPassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.passwordRequired;
+    }
+    if (value.length < 8) {
+      return AppStrings.passwordMinLength;
+    }
+    if (value == _oldPasswordController.text) {
+      return AppStrings.newPasswordMustDiffer;
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.passwordRequired;
+    }
+    if (value != _newPasswordController.text) {
+      return AppStrings.passwordsDoNotMatch;
+    }
+    return null;
+  }
+
+  void _submitChangePassword() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    // Backend/password update will be added in PSEE.
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +104,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         ),
       ),
 
-      body: Column(
-        children: [
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(30, 38, 30, 20),
@@ -59,6 +123,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     hintText: 'abc@gmail.com',
                     prefixIcon: Icons.email_outlined,
                     keyboardType: TextInputType.emailAddress,
+                    controller: _emailController,
+                    validator: _validateEmail,
                   ),
 
                   const SizedBox(height: 7),
@@ -70,6 +136,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                   _buildPasswordField(
                     hintText: '***********',
+                    controller: _oldPasswordController,
+                    validator: _validateOldPassword,
                     visible: oldPasswordVisible,
                     onVisibilityChanged: () {
                       setState(() {
@@ -87,6 +155,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                   _buildPasswordField(
                     hintText: '***********',
+                    controller: _newPasswordController,
+                    validator: _validateNewPassword,
                     visible: newPasswordVisible,
                     onVisibilityChanged: () {
                       setState(() {
@@ -104,6 +174,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                   _buildPasswordField(
                     hintText: '***********',
+                    controller: _confirmPasswordController,
+                    validator: _validateConfirmPassword,
                     visible: confirmPasswordVisible,
                     onVisibilityChanged: () {
                       setState(() {
@@ -119,10 +191,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     width: double.infinity,
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Backend/password update
-                        // will be added in PSEE.
-                      },
+                      onPressed: _submitChangePassword,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         foregroundColor: Colors.white,
@@ -148,7 +217,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
           // BOTTOM NAVIGATION
           
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -166,13 +236,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget _buildTextField({
     required String hintText,
     required IconData prefixIcon,
+    required TextEditingController controller,
+    required String? Function(String?) validator,
     TextInputType? keyboardType,
   }) {
-    return SizedBox(
-      height: 35,
-      child: TextField(
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      validator: validator,
+      decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 10, color: Colors.grey),
           prefixIcon: Icon(prefixIcon, size: 16),
@@ -187,21 +259,34 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             borderRadius: BorderRadius.circular(7),
             borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
           ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7),
+            borderSide: BorderSide(color: AppColors.errorColor, width: 1.5),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7),
+            borderSide: BorderSide(color: AppColors.errorColor, width: 1.5),
+          ),
+          errorStyle: TextStyle(
+            fontSize: AppSizes.extraSmall,
+            color: AppColors.errorColor,
+          ),
         ),
-      ),
     );
   }
 
   Widget _buildPasswordField({
     required String hintText,
+    required TextEditingController controller,
+    required String? Function(String?) validator,
     required bool visible,
     required VoidCallback onVisibilityChanged,
   }) {
-    return SizedBox(
-      height: 35,
-      child: TextField(
-        obscureText: !visible,
-        decoration: InputDecoration(
+    return TextFormField(
+      controller: controller,
+      obscureText: !visible,
+      validator: validator,
+      decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 10, color: Colors.grey),
 
@@ -227,8 +312,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             borderRadius: BorderRadius.circular(7),
             borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
           ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7),
+            borderSide: BorderSide(color: AppColors.errorColor, width: 1.5),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7),
+            borderSide: BorderSide(color: AppColors.errorColor, width: 1.5),
+          ),
+          errorStyle: TextStyle(
+            fontSize: AppSizes.extraSmall,
+            color: AppColors.errorColor,
+          ),
         ),
-      ),
     );
   }
 
