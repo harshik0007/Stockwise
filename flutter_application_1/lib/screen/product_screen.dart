@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen/add_product.dart';
 import 'package:flutter_application_1/screen/dashboard_screen.dart';
+import 'package:flutter_application_1/screen/price_range.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/app_text_size.dart';
@@ -154,7 +155,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      _showPriceRange(context);
+                      _showPriceRange();
                     },
 
                     child: Container(
@@ -448,27 +449,12 @@ class _ProductScreenState extends State<ProductScreen> {
   // PRICE RANGE
   // ==========================================================
 
-  void _showPriceRange(BuildContext context) {
-    showDialog(
-      context: context,
-
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Price Range'),
-
-          content: const Text('Price range filter will be connected later.'),
-
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  void _showPriceRange() {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const PriceRangePage(),
+    ),
+  );
+}
 }

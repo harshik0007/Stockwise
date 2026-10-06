@@ -43,4 +43,8 @@ class AppColors {
   static const Color border = Color(0xffdfe3e7);
 
   static const Color green = Colors.green;
+
+
+  static const Color imageBorder =
+      Color(0xff999999);
 }

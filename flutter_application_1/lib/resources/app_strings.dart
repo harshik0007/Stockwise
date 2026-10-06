@@ -313,4 +313,85 @@ class AppStrings {
   static const String updatedSuccessfully =
       'Product updated successfully';
 
+  // product detail
+
+  
+
+  // ================= PRODUCT DETAILS =================
+
+  static const String productDetails = 'Product Details';
+
+  
+  static const String banglesCategory = 'Bangles';
+  static const String purchasePriceValue = '₹80';
+  static const String sellingPriceValue = '₹149';
+  static const String stockValue = '1000';
+  static const String minimumStockValue = '100';
+  static const String descriptionValue = 'Golden banges';
+
+  // ================= BUTTONS =================
+
+  static const String edit = 'Edit';
+
+
+
+  // ================= JHUMKHA =================
+
+
+  static const String jhumkhaCategory =
+      'Jhumkha';
+
+  static const String jhumkhaPurchasePrice =
+      '₹109';
+
+  static const String jhumkhaSellingPrice =
+      '₹149';
+
+  static const String jhumkhaStock =
+      '500';
+
+  static const String jhumkhaMinimumStock =
+      '100';
+
+  static const String jhumkhaDescription =
+      'Golden Jhumkha';
+  
+  // price Range
+   static const String priceRange = 'Price Range';
+
+  static const String selectPriceRange =
+      'Select Price Range';
+
+  static const String minimumPrice =
+      'Minimum Price';
+
+  static const String maximumPrice =
+      'Maximum Price';
+
+  static const String minPriceValue =
+      '₹100';
+
+  static const String maxPriceValue =
+      '₹5000';
+
+  static const String range1 =
+      '₹0 - ₹100';
+
+  static const String range2 =
+      '₹100 - ₹300';
+
+  static const String range3 =
+      '₹300 - ₹500';
+
+  static const String range4 =
+      '₹500 - ₹1000';
+
+  static const String range5 =
+      'Above ₹1000';
+
+  static const String reset =
+      'Reset';
+
+  static const String apply =
+      'Apply';
 }
