@@ -81,18 +81,18 @@ class _ProductScreenState extends State<ProductScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
 
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 28),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, size: 28),
 
-          onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DashboardScreen(),
-                  ),
-                );
-              },
-        ),
+        //   onPressed: () {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             builder: (context) => const DashboardScreen(),
+        //           ),
+        //         );
+        //       },
+        // ),
 
         title: Text(
           'Products',
@@ -108,7 +108,7 @@ class _ProductScreenState extends State<ProductScreen> {
             icon: const Icon(Icons.add, size: 25),
 
             onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const AddProductPage(),

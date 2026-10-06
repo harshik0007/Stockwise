@@ -64,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
 
-        leading: const Icon(Icons.arrow_back, size: 32),
+        // leading: const Icon(Icons.arrow_back, size: 32),
 
         title: Text(
           AppStrings.settings,

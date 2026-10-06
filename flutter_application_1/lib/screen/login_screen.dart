@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
+import 'package:flutter_application_1/screen/forget_password_screen.dart';
+import 'package:flutter_application_1/screen/register_screen.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_strings.dart';
 
@@ -155,6 +157,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextButton(
                   onPressed: () {
                     // Forgot password
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ForgetPasswordScreen()
+                      )
+                    );
                   },
 
                   child: const Text(
@@ -221,6 +229,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(
                     onPressed: () {
                       // Sign up
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context)=> const RegisterScreen()
+                        ),
+                      );
                     },
 
                     child: const Text(

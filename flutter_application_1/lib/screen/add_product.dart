@@ -58,12 +58,7 @@ class _AddProductPageState extends State<AddProductPage> {
   // =================================================
 
   void goToProductScreen() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ProductScreen(),
-      ),
-    );
+    Navigator.pop(context);
   }
 
   // =================================================

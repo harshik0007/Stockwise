@@ -17,12 +17,12 @@ class SalesScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         elevation: 0,
 
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 30),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, size: 30),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
 
         title: Text(
           AppStrings.sales,

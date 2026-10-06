@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/resources/app_colors.dart';
 import 'package:flutter_application_1/resources/app_strings.dart';
 import 'package:flutter_application_1/resources/app_text_size.dart';
+import 'package:flutter_application_1/screen/login_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -35,20 +36,20 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               const SizedBox(height: 80),
 
               // Back Arrow
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                }, 
+              // IconButton(
+              //   onPressed: () {
+              //     Navigator.pop(context);
+              //   }, 
 
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 30,
-                  color: AppColors.textColor,
-                ),
+              //   icon: const Icon(
+              //     Icons.arrow_back,
+              //     size: 30,
+              //     color: AppColors.textColor,
+              //   ),
 
-                padding: EdgeInsets.zero,
-                alignment: Alignment.centerLeft,
-              ),
+              //   padding: EdgeInsets.zero,
+              //   alignment: Alignment.centerLeft,
+              // ),
 
               const SizedBox(height: 50),
 
@@ -157,6 +158,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 child: TextButton(
                   onPressed: () {
                     // back to login
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen())
+                    );
                   },
 
                   child: const Text(
