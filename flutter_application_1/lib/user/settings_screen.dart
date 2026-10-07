@@ -78,8 +78,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Column(
         children: [
           // SETTINGS OPTIONS
-          Expanded(
-            child: Padding(
+            Padding(
               padding: const EdgeInsets.fromLTRB(38, 36, 28, 0),
               child: Container(
                 width: double.infinity,
@@ -154,11 +153,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         _showLogoutDialog(context);
                       },
                     ),
+                    _buildDivider()
                   ],
                 ),
               ),
             ),
-          ),
+          
 
           // BOTTOM NAVIGATION
           
