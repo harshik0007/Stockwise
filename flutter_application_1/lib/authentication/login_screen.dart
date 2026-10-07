@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 child: ElevatedButton(
                   onPressed: () {
-                    print("LOGIN BUTTON CLICKED");
+                    // print("LOGIN BUTTON CLICKED");
 
                     if (_formKey.currentState!.validate()) {
                       print("VALIDATION PASSED");

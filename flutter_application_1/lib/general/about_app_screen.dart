@@ -94,104 +94,104 @@ class AboutAppScreen extends StatelessWidget {
           ),
 
           // BOTTOM NAVIGATION
-          _buildBottomNavigation(context),
+          // _buildBottomNavigation(context),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavigation(BuildContext context) {
-    return Container(
-      height: 66,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade300)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(
-            context: context,
-            icon: Icons.home_outlined,
-            label: AppStrings.dashboard,
-            selected: false,
-            index: 0,
-          ),
+  // Widget _buildBottomNavigation(BuildContext context) {
+  //   return Container(
+  //     height: 66,
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       border: Border(top: BorderSide(color: Colors.grey.shade300)),
+  //     ),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //       children: [
+  //         _buildNavItem(
+  //           context: context,
+  //           icon: Icons.home_outlined,
+  //           label: AppStrings.dashboard,
+  //           selected: false,
+  //           index: 0,
+  //         ),
 
-          _buildNavItem(
-            context: context,
-            icon: Icons.inventory_2_outlined,
-            label: AppStrings.product,
-            selected: false,
-            index: 1,
-          ),
+  //         _buildNavItem(
+  //           context: context,
+  //           icon: Icons.inventory_2_outlined,
+  //           label: AppStrings.product,
+  //           selected: false,
+  //           index: 1,
+  //         ),
 
-          _buildNavItem(
-            context: context,
-            icon: Icons.inventory_2,
-            label: AppStrings.stock,
-            selected: true,
-            index: 2,
-          ),
+  //         _buildNavItem(
+  //           context: context,
+  //           icon: Icons.inventory_2,
+  //           label: AppStrings.stock,
+  //           selected: true,
+  //           index: 2,
+  //         ),
 
-          _buildNavItem(
-            context: context,
-            icon: Icons.shopping_cart_outlined,
-            label: AppStrings.sales,
-            selected: false,
-            index: 3,
-          ),
+  //         _buildNavItem(
+  //           context: context,
+  //           icon: Icons.shopping_cart_outlined,
+  //           label: AppStrings.sales,
+  //           selected: false,
+  //           index: 3,
+  //         ),
 
-          _buildNavItem(
-            context: context,
-            icon: Icons.person_outline,
-            label: AppStrings.settings,
-            selected: false,
-            index: 4,
-          ),
-        ],
-      ),
-    );
-  }
+  //         _buildNavItem(
+  //           context: context,
+  //           icon: Icons.person_outline,
+  //           label: AppStrings.settings,
+  //           selected: false,
+  //           index: 4,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildNavItem({
-    required BuildContext context,
-    required IconData icon,
-    required String label,
-    required bool selected,
-    required int index,
-  }) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => MainScreen(initialIndex: index)),
-            (route) => false,
-          );
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 25,
-              color: selected ? AppColors.primaryColor : Colors.grey,
-            ),
+  // Widget _buildNavItem({
+  //   required BuildContext context,
+  //   required IconData icon,
+  //   required String label,
+  //   required bool selected,
+  //   required int index,
+  // }) {
+  //   return MouseRegion(
+  //     cursor: SystemMouseCursors.click,
+  //     child: GestureDetector(
+  //       onTap: () {
+  //         Navigator.pushAndRemoveUntil(
+  //           context,
+  //           MaterialPageRoute(builder: (_) => MainScreen(initialIndex: index)),
+  //           (route) => false,
+  //         );
+  //       },
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Icon(
+  //             icon,
+  //             size: 25,
+  //             color: selected ? AppColors.primaryColor : Colors.grey,
+  //           ),
 
-            const SizedBox(height: 2),
+  //           const SizedBox(height: 2),
 
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 11,
-                color: selected ? AppColors.primaryColor : Colors.grey,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  //           Text(
+  //             label,
+  //             style: TextStyle(
+  //               fontSize: 11,
+  //               color: selected ? AppColors.primaryColor : Colors.grey,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

@@ -237,32 +237,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // =================================================
               // LOGOUT BUTTON
               // =================================================
-              SizedBox(
-                width: double.infinity,
-                height: 40,
+              // SizedBox(
+              //   width: double.infinity,
+              //   height: 40,
 
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    _showLogoutDialog(context);
-                  },
+              //   child: ElevatedButton.icon(
+              //     onPressed: () {
+              //       _showLogoutDialog(context);
+              //     },
 
-                  icon: const Icon(Icons.logout, size: 18),
+              //     icon: const Icon(Icons.logout, size: 18),
 
-                  label: const Text(AppStrings.logout),
+              //     label: const Text(AppStrings.logout),
 
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: Colors.red,
 
-                    foregroundColor: Colors.white,
+              //       foregroundColor: Colors.white,
 
-                    elevation: 0,
+              //       elevation: 0,
 
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                ),
-              ),
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(9),
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               const SizedBox(height: 35),
             ],
